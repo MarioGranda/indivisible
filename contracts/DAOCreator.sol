@@ -6,11 +6,9 @@ pragma solidity 0.8.14;
 */
 
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
-import "@openzeppelin/contracts/proxy/beacon/UpgradeableBeacon.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts/proxy/beacon/BeaconProxy.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "./DAO.sol";
 
 contract DAOCreator is
     Initializable,
@@ -19,29 +17,35 @@ contract DAOCreator is
 {
     address public beaconDAO;
     address public beaconToken;
-    bytes32 public constant CREATOR_ROLE = keccak256("CREATOR_ROLE");
 
-    function initialize(address admin) public initializer {
+    event DAOCreated(
+        address indexed daoCreator,
+        address indexed dao
+    );
+
+    function initialize(address admin, address _beaconDAO, address _beaconToken) public initializer {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
-        _grantRole(CREATOR_ROLE, msg.sender);
-        UpgradeableBeacon _beaconToken = new UpgradeableBeacon(address(new Token()));
-        UpgradeableBeacon _beaconDAO = new UpgradeableBeacon(address(new DAO()));
-         _beaconDAO.transferOwnership(admin);
-        beaconDAO = address(_beaconDAO);
+        beaconDAO = _beaconDAO;
+        beaconToken = _beaconToken;
     }
 
-    function createDAO(string memory _name, string memory _symbol, bytes32 _merkleRoot) external onlyRole(CREATOR_ROLE) {
+    function createDAO(string memory _name, string memory _symbol, uint256 _mintAmount, uint32 _minConsensusPeriod, uint32 _minVotingPeriod, uint32 _minQuorum) external {
         BeaconProxy dao = new BeaconProxy(
             beaconDAO,
             abi.encodeWithSignature(
-                "initialize(address,address,string,string)",
+                "initialize(address,address,string,string,uint256,uint32,uint32,uint32)",
                 msg.sender,
                 beaconToken,
                 _name,
                 _symbol,
-                _merkleRoot
+                _mintAmount, 
+                _minConsensusPeriod,
+                _minVotingPeriod,
+                _minQuorum
             )
         );
+
+        emit DAOCreated(msg.sender, address(dao));
     }
 
     function _authorizeUpgrade(address)
