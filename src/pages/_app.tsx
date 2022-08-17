@@ -1,0 +1,31 @@
+import React, { FC } from "react";
+import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
+import BaseLayout from "@/client/layouts/BaseLayout";
+// import store from "@/client/redux/store";
+
+import "@/client/styles/globals.scss";
+import NextScripts from "@/client/components/NextScripts";
+
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <>
+      {/* <Provider store={store}> */}
+      <NextScripts />
+        <BaseLayout>
+          <TopProgressBar />
+          <Component {...pageProps} />
+        </BaseLayout>
+      {/* </Provider> */}
+    </>
+  );
+};
+
+const TopProgressBar = dynamic(
+  () => {
+    return import("@/client/components/TopProgressBar");
+  },
+  { ssr: false }
+);
+
+export default MyApp;

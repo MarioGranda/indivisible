@@ -3,9 +3,9 @@ require("@openzeppelin/hardhat-upgrades");
 require("dotenv").config();
 //require("@nomiclabs/hardhat-etherscan");
 
-const privateKey = process.env.privateKey || "";
-const infuraId = process.env.infuraKey || "";
-const alchemyId = process.env.alchemyKey || "";
+const privateKey = process.env.PRIVATE_KEY || "";
+const infuraId = process.env.INFURA_KEY || "";
+const alchemyId = process.env.ALCHEMY_KEY || "";
 
 module.exports = {
   defaultNetwork: "hardhat",

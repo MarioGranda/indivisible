@@ -4,10 +4,15 @@
   "description": "Indivisible DAO project",
   "main": "index.js",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.145.0",
+    "@aws-sdk/s3-request-presigner": "^3.145.0",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@openzeppelin/contracts": "^4.7.0",
     "@openzeppelin/contracts-upgradeable": "^4.7.0",
     "@openzeppelin/hardhat-upgrades": "^1.19.1",
+    "autoprefixer": "^10.4.7",
+    "aws-sdk": "^2.1194.0",
+    "axios": "^0.27.2",
     "chai": "^4.3.6",
     "crypto-js": "^4.1.1",
     "db-migrate": "^0.11.13",
@@ -17,9 +22,21 @@
     "hardhat": "^2.10.0",
     "merkletreejs": "^0.2.32",
     "next": "^12.2.2",
+    "nprogress": "^0.2.0",
+    "postcss": "^8.4.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "solc": "^0.8.15"
+    "react-icons": "^4.4.0",
+    "sass": "^1.54.0",
+    "solc": "^0.8.15",
+    "zod": "^3.16.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.1.0",
+    "@types/react": "^18.0.15",
+    "ethereum-waffle": "^3.4.4",
+    "tailwindcss": "^3.1.6",
+    "typescript": "^4.7.4"
   },
   "scripts": {
     "test": "mocha",
