@@ -1,7 +1,8 @@
 import Image from "next/image";
-import React, { FC } from "react";
 import Link from "next/link";
+import React, { FC } from "react";
 import { Dao } from "@/shared/models";
+import { getDaoUrl } from "@/shared/utils/createUrls";
 //import { DEFAULT_IMAGE_PLACEHOLDER } from "@/shared/constants/path";
 
 interface Props {
@@ -54,11 +55,13 @@ const DaoCard: FC<Props> = ({
                         >
                             Join +
                         </button>
+                        <Link passHref href={getDaoUrl(dao.slug)}>
                         <button
                             className="flex items-center -end h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
                         >
                             Visit
                         </button>
+                        </Link>
                         </div>
                     </div>
                 </article>

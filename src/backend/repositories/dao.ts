@@ -50,3 +50,19 @@ export const findAllDaos = async (
 
     return rows.map(daoMapper);
 };
+
+export const findDaoBySlug = async (slug: string
+    ): Promise<Dao> => {
+        const query = `select d.* 
+        from ${TABLE_NAMES.DAO} d
+        where d.slug = ?
+      `;
+        const pool = await getPool();
+        const connection = await pool.getConnection();
+    
+        const [rows] = await connection.query<RowDataPacket[]>(
+            query, slug
+        );
+    
+        return rows.length > 0 ? daoMapper(rows[0]) : null;
+    };
