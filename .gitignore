@@ -1,25 +1,21 @@
-node_modules
+node_modules/
+cache/
+artifacts/
+uploads/
 
-node_modules
+data/mysql/*
+
 .env
-coverage
-coverage.json
-typechain
-typechain-types
 
-#Hardhat files
-cache
-artifacts
+yarn.lock
+config-scripts.js
+config.js
+
+.next
+.openzeppelin
+.DS_Store
+tsconfig.tsbuildinfo
+.vercel
 
 
-node_modules
-.env
-coverage
-coverage.json
-typechain
-typechain-types
-
-#Hardhat files
-cache
-artifacts
 

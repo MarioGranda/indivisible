@@ -34,3 +34,19 @@ export interface Dao {
     createdAt: string;
     updatedAt: string;
   }
+
+  export interface Proposal {
+    id: number;
+    name: string;
+    description: string;
+    daoId: number;
+    proposalCreatorAddress: string;
+    minQuorum: number;
+    consensusDeadline: string;
+    votingDeadline: string;
+    yea: number;
+    nay: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+  }

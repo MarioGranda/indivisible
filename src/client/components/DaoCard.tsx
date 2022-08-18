@@ -57,7 +57,7 @@ const DaoCard: FC<Props> = ({
                         </button>
                         <Link passHref href={getDaoUrl(dao.slug)}>
                         <button
-                            className="flex items-center -end h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
+                            className="flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
                         >
                             Visit
                         </button>
