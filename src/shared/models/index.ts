@@ -50,3 +50,11 @@ export interface Dao {
     createdAt: string;
     updatedAt: string;
   }
+
+  export interface User {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    address: string;
+    avatar: string;
+  }

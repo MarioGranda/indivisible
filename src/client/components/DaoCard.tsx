@@ -3,6 +3,9 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { Dao } from "@/shared/models";
 import { getDaoUrl } from "@/shared/utils/createUrls";
+import { joinDao } from "../utils/joinDao";
+import getProvider from "@/shared/utils/getProvider";
+import axios from "axios";
 //import { DEFAULT_IMAGE_PLACEHOLDER } from "@/shared/constants/path";
 
 interface Props {
@@ -15,10 +18,17 @@ const DaoCard: FC<Props> = ({
     dao,
     className,
 }) => {
-
     const _class = "w-[350px] border border-white text-white";
     const _typeClass =
         "bg-black rounded-lg text-xl font-source text-white min-w-max"
+
+    const join = async() => {
+        const { signerAddress } = await joinDao(dao.address ,getProvider())
+        if (!signerAddress) {
+            return;
+        }
+        await axios.post("/api/join-dao", {signerAddress});
+    }
 
     return (
         <section className={_class}>
@@ -51,6 +61,7 @@ const DaoCard: FC<Props> = ({
                         <div className="flex justify-between"
                         >
                             <button
+                            onClick={join}
                             className="flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
                         >
                             Join +
