@@ -2,7 +2,8 @@ import React, { FC } from "react";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import BaseLayout from "@/client/layouts/BaseLayout";
-// import store from "@/client/redux/store";
+import { Provider } from "react-redux";
+import store from "@/client/redux/store";
 
 import "@/client/styles/globals.scss";
 import NextScripts from "@/client/components/NextScripts";
@@ -12,10 +13,12 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     <>
       {/* <Provider store={store}> */}
       <NextScripts />
+      <Provider store={store}>
         <BaseLayout>
           <TopProgressBar />
           <Component {...pageProps} />
         </BaseLayout>
+        </Provider>
       {/* </Provider> */}
     </>
   );

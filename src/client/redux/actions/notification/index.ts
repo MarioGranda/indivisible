@@ -25,7 +25,7 @@ export const openPendingTransactionNotification = (image: string) => {
   return openNotification({
     title: "Your transaction is being processed",
     status: "PENDING",
-    image,
+    image: image
   });
 };
 
@@ -47,7 +47,7 @@ export const openTransactionCompleteNotification = (
 ) => {
   const { status, transactionHash } = result;
   return openNotification({
-    title: "Your transaction is being processed",
+    title: status === 1 ? "DAO createad successfully" : "Oops! Something went wrong",
     status: status === 1 ? "SUCCESS" : "FAILED",
     description: "",
     transactionHash: transactionHash,

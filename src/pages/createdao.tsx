@@ -1,14 +1,17 @@
-import { ChangeEvent, FC, useCallback, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import Input from "@/client/components/Input";
 import TextArea from "@/client/components/TextArea";
 import { ContentFileType } from "@/shared/models";
 import FileInput from "@/client/components/FileInput";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import getProvider from "@/shared/utils/getProvider";
-import { ethers } from "ethers";
 import { deployDao } from "@/client/utils/createDao";
 import { CreateDaoInput } from "@/shared/validators/createDao";
+import { openPendingTransactionNotification, openTransactionCompleteNotification } from "@/client/redux/actions/notification";
+import { useNotification } from "@/client/redux/selectors";
+import Notification from "@/client/components/Notification";
 
 interface Props {
 
@@ -18,6 +21,15 @@ export const CreateItem: FC<Props> = ({ }) => {
   const [daoImage, setDaoImage] = useState<ContentFileType | null>(null);
   const [tokenImage, setTokenImage] = useState<ContentFileType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch()
+  const notification = useNotification();
+
+  useEffect(() => {
+    if (daoImage?.image?.preview) {
+      dispatch(openPendingTransactionNotification(daoImage.image.preview))
+    }
+    
+  }, [daoImage])
 
   const [formInput, setFormInput] = useState({
     name: "",
@@ -158,6 +170,7 @@ export const CreateItem: FC<Props> = ({ }) => {
         //     status: "PENDING",
         //   })
         // );
+        await dispatch(openPendingTransactionNotification(daoImage.image.preview))
         
         const {
           daoAddress,
@@ -182,6 +195,8 @@ export const CreateItem: FC<Props> = ({ }) => {
             },
           }
         );
+        const result = { status, transactionHash }
+        await dispatch(openTransactionCompleteNotification(result, daoImage.image.preview))
         //if (status === 1) {
         //   await dispatch(
         //     openNotification({
@@ -327,6 +342,7 @@ export const CreateItem: FC<Props> = ({ }) => {
           Create DAO
         </button>
       </div>
+      {notification && <Notification></Notification>}
     </FixedContainer>
   );
 };

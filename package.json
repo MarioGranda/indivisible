@@ -14,6 +14,7 @@
     "aws-sdk": "^2.1194.0",
     "axios": "^0.27.2",
     "chai": "^4.3.6",
+    "classnames": "^2.3.1",
     "crypto-js": "^4.1.1",
     "db-migrate": "^0.11.13",
     "db-migrate-mysql": "^2.2.0",
