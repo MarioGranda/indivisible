@@ -6,6 +6,7 @@ import { getDaoUrl } from "@/shared/utils/createUrls";
 import { joinDao } from "../utils/joinDao";
 import getProvider from "@/shared/utils/getProvider";
 import axios from "axios";
+import classNames from "classnames";
 //import { DEFAULT_IMAGE_PLACEHOLDER } from "@/shared/constants/path";
 
 interface Props {
@@ -18,7 +19,7 @@ const DaoCard: FC<Props> = ({
     dao,
     className,
 }) => {
-    const _class = "w-[350px] border border-white text-white";
+    const _class = classNames("w-[350px] h-[450px] text-white", className);
     const _typeClass =
         "bg-black rounded-lg text-xl font-source text-white min-w-max"
 
@@ -33,7 +34,7 @@ const DaoCard: FC<Props> = ({
     return (
         <section className={_class}>
             <a>
-                <article className="bg-black px-4 rounded-sm cursor-pointer">
+                <article className="bg-black px-4 rounded-sm cursor-pointer border border-white">
                     <div className="flex flex-row justify-between items-center py-4">
                         <span className={_typeClass}>
                             DAO
