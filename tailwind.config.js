@@ -35,22 +35,32 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
-      }
+      },
     },
     keyframes: {
       zoomOut: {
         '0%': { transform: 'scale(1,1)', color:"white" },
-        '100%': { transform: 'scale(10,10)', color: "black"},
+        '100%': { transform: 'scale(10,10)', color: "transparent"},
       },
       zoomIn: {
-        '0%': { transform: 'scale(10,10)', color: "black"},
+        '0%': { transform: 'scale(10,10)', color: "transparent" },
         '100%': { transform: 'scale(1,1)', color:"white" },
       },
+      disappear: {
+        '0%': { opacity: 1 },
+        '100%': { opacity: 0},
+      },
+      appear: {
+        '0%': { opacity: 0 },
+        '100%': { opacity: 1},
+      }
     },
     animation: {
-      'zoom-out': 'zoomOut 2s ease-in-out alternate',
-      'zoom-in': 'zoomIn'
-    },
+      'zoom-out': 'zoomOut 500ms ease-in-out forwards',
+      'zoom-in': 'zoomIn 500ms ease-in-out alternate',
+      'disappear': 'disappear 1000ms ease-in-out forwards',
+      'appear': 'appear 1000ms ease-in-out forwards'
+    }
   }},
   plugins: [],
 }

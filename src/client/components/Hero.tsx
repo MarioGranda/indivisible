@@ -46,21 +46,21 @@ const Hero: FC<Props> = ({ className, dao }) => {
             <ImArrowRight2></ImArrowRight2>
           </button>
           <div className="grid grid-cols-3 w-full">
-          <div className="flex items-center">
-          <div className="box-border h-10 w-2 border-white border-4 bg-white">
-          </div>
-          <span className="text-white font-source mx-4 text-xl">+100 DAOs</span>
-          </div>
-          <div className="flex items-center">
-          <div className="box-border h-10 w-2 border-white border-4 bg-white">
-          </div>
-          <span className="text-white font-source mx-4 text-xl whitespace-nowrap">+35K Members</span>
-          </div>
-          <div className="flex items-center">
-          <div className="box-border h-10 w-2 border-white border-4 bg-white">
-          </div>
-          <span className="text-white font-source mx-4 text-xl">+100K Proposals</span>
-          </div>
+            <div className="flex items-center">
+              <div className="box-border h-10 w-2 border-white border-4 bg-white">
+              </div>
+              <span className="text-white font-source mx-4 text-xl">+100 DAOs</span>
+            </div>
+            <div className="flex items-center">
+              <div className="box-border h-10 w-2 border-white border-4 bg-white">
+              </div>
+              <span className="text-white font-source mx-4 text-xl whitespace-nowrap">+35K Members</span>
+            </div>
+            <div className="flex items-center">
+              <div className="box-border h-10 w-2 border-white border-4 bg-white">
+              </div>
+              <span className="text-white font-source mx-4 text-xl">+100K Proposals</span>
+            </div>
           </div>
         </FixedContainer>
         <div className="flex relative mt-10 justify-center px-20">

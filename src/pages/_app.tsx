@@ -11,7 +11,6 @@ import NextScripts from "@/client/components/NextScripts";
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
-      {/* <Provider store={store}> */}
       <NextScripts />
       <Provider store={store}>
         <BaseLayout>
@@ -19,7 +18,6 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </BaseLayout>
         </Provider>
-      {/* </Provider> */}
     </>
   );
 };
