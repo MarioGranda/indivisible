@@ -40,7 +40,7 @@ const Home: FC<[]> = () => {
         {
           smooth: true,
           direction: "vertical",
-          multiplier: 0.8,
+          multiplier: 0.5,
           // ... all available Locomotive Scroll instance options 
         }
       }
@@ -99,8 +99,8 @@ const Home: FC<[]> = () => {
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section id="about" className="">
-          <FixedContainer className="flex flex-col gap-52 h-screen text-white font-source mb-96">
+        <div data-scroll-section id="about" className="mb-[1100px]">
+          <FixedContainer className="flex flex-col gap-52 h-screen text-white font-source">
             <p data-scroll data-scroll-sticky data-scroll-target="#about" className="pt-40 w-[624px] text-5xl">Potential use cases</p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
