@@ -14,9 +14,8 @@ interface Props {
 }
 
 const Footer: FC<Props> = () => {
-  const year = new Date().getFullYear();
   return (
-    <footer className="flex flex-col items-center px-3 pt-8 bg-black h-[250px] border-t border-white">
+    <footer data-scroll className="flex flex-col items-center px-3 pt-8 bg-black h-[150px] border-t border-white">
       <div className="flex mb-7 space-x-5">
         <a target="_blank" href={INSTAGRAM} rel="noreferrer">
           <Image

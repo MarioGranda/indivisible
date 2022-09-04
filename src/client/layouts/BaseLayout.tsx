@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 // import Notification from "../components/Notification";
 
@@ -9,8 +10,7 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
       {/* <Notification /> */}
       <NavBar />
       <main>{children}</main>
-      <footer></footer>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

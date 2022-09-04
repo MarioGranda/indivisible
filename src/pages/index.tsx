@@ -6,6 +6,9 @@ import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import { MdFamilyRestroom } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import { FaHandshake } from "react-icons/fa";
+import Marquee from "react-fast-marquee";
+import { BENEFITS } from "@/client/utils/benefits";
+import { useRouter } from "next/router";
 
 
 const Home: FC<[]> = () => {
@@ -13,6 +16,7 @@ const Home: FC<[]> = () => {
   const borderOut = useRef<HTMLDivElement>(null);
   const text = useRef<HTMLParagraphElement>(null);
   const containerRef = useRef(null)
+  const router = useRouter()
 
   let isDown = false;
 
@@ -41,6 +45,7 @@ const Home: FC<[]> = () => {
           smooth: true,
           direction: "vertical",
           multiplier: 0.5,
+          lerp: 0.2
           // ... all available Locomotive Scroll instance options 
         }
       }
@@ -54,7 +59,7 @@ const Home: FC<[]> = () => {
         <div ref={text} data-scroll-section id="deploying-democracy" className="text-white font-source">
           <FixedContainer className="flex justify-center h-[1100px]">
             <span data-scroll data-scroll-delay="0.035" data-scroll-speed="-2" className="pt-[400px] hover:scale-110 deploying-democracy-bg bg-[center_top_200px]">
-              <p className="text-8xl">INDIVISBLE</p>
+              <p className="text-8xl">INDIVISIBLE</p>
               <p className="text-xl">Deploying democracy</p>
             </span>
           </FixedContainer>
@@ -75,13 +80,13 @@ const Home: FC<[]> = () => {
           />
         </div>
         <div data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-52">
+          <FixedContainer className="flex flex-col gap-52 h-[1500px]">
             <div className="w-[624px] text-white font-source">
               <h2 className="text-5xl py-4">
                 Why?
               </h2>
               <h3 className="text-3xl py-4">
-              Communities are happier & healthier, & neighbors are stronger when they’re united.
+                Communities are happier & healthier, & neighbors are stronger when they’re united.
               </h3>
               Giving people a platform to build a shared vision for a common future and solutions to achieve small things and potentially overcome failures in today’s representative models that efficiently barter power and resources, and produce inefficiency, apathy, inequality and injustice.
             </div>
@@ -99,54 +104,65 @@ const Home: FC<[]> = () => {
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section id="about" className="mb-[1100px]">
-          <FixedContainer className="flex flex-col gap-52 h-screen text-white font-source">
-            <p data-scroll data-scroll-sticky data-scroll-target="#about" className="pt-40 w-[624px] text-5xl">Potential use cases</p>
+        <div id="about" data-scroll-section className="h-screen">
+          <FixedContainer className="flex flex-col gap-52 text-white font-source">
+            <p data-scroll data-scroll-sticky data-scroll-target="#about" data-scroll-repeat className="pt-28 w-[624px] text-4xl">Potential use cases</p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-               <MdFamilyRestroom size={40}/>Family & friends
+                <MdFamilyRestroom size={40} />Family & friends
               </h3>
               <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <AiFillHome size={40}/>Tenants/interest groups
+                <AiFillHome size={40} />Tenants/interest groups
               </h3>
               <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-              <FaHandshake size={40}/>Coalitions
+                <FaHandshake size={40} />Coalitions
               </h3>
               <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
               <h3 className="text-3xl my-5"></h3>
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section id="build-a-community" className="">
-          <FixedContainer className="flex flex-col gap-52 h-screen text-white font-source mb-96">
-            <p data-scroll data-scroll-sticky data-scroll-target="#build-a-community" className="pt-40 w-[624px] text-5xl">Build a community</p>
+        <div id="build-a-community" data-scroll-section className="h-[1250px] mt-[1100px]">
+          <FixedContainer className="flex flex-col gap-52 text-white font-source">
+            <p data-scroll data-scroll-sticky data-scroll-target="#build-a-community" data-scroll-repeat className="pt-28 w-[624px] text-4xl">Build a healthy community</p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-               <MdFamilyRestroom size={40}/>Family & friends
+                Participatory economics
+              </h3>
+              <p className="text-xl">Equity, solidarity, diversity, workers' self-management, efficiency (defined as accomplishing goals without wasting valued assets) and sustainability..</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                Participatory politics
+              </h3>
+              <p className="text-xl">Freedom, self-management, justice, solidarity, and tolerance.</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                Governance
               </h3>
               <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <AiFillHome size={40}/>Tenants/interest groups
+                Blockchain technology
               </h3>
-              <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
+              <p className="text-xl">Censhorship-resistant, transparency, auditability and prevention manipulation.</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-              <FaHandshake size={40}/>Coalitions
+                Rewarding participation
               </h3>
-              <p className="text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
-              <h3 className="text-3xl my-5"></h3>
+              <p className="text-xl">Get rewards by helping your community become a better place.</p>
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section>
-          <FixedContainer className="mt-[1100px] flex flex-col gap-52 h-screen">
-            <p className="w-[624px] text-white font-source text-5xl">Lorem Ipsum</p>
-            <p className="w-[624px] place-self-end text-white font-source text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis soluta, dolores expedita possimus magni molestias cumque repellat rem suscipit commodi totam, eius provident maiores blanditiis, explicabo illo quo delectus! Libero.</p>
+        <div data-scroll-section className="mt-[200px]">
+          <FixedContainer className="h-screen flex flex-col justify-center items-center gap-28 text-white font-source">
+            <button 
+            className="border-4 border-white p-4 text-3xl w-[300px]"
+            onClick={() => router.push("/explore")}
+            >
+              Get Started
+            </button>
+            <Marquee className="text-2xl" gradient={false} speed={15}>
+            {BENEFITS.join(" | ")}
+            </Marquee>
           </FixedContainer>
-        </div>
-        <div data-scroll-section className="">
-          <Footer />
         </div>
       </div>
     </LocomotiveScrollProvider>
