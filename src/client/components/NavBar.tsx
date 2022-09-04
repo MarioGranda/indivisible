@@ -64,7 +64,7 @@ const NavBar = () => {
                 </a>
               </Link>
             </div>
-            <div className="place-self-end">
+            <div className="place-self-end mb-1.5">
               {!isLoading &&
                 <button className="text-white border hover:border-green hover:text-green px-7 py-3" onClick={connectWallet}>
                   <p className="font-source">{userWallet ? parseEthAddress(userWallet) : "Connect Wallet"}</p>

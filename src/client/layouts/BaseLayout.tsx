@@ -10,7 +10,7 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
       {/* <Notification /> */}
       <NavBar />
       <main>{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import FixedContainer from "@/client/layouts/FixedContainer";
 import Image from "next/image";
-import React, { FC, useRef } from "react"
+import React, { FC, useEffect, useRef } from "react"
 import Footer from "@/client/components/Footer";
-import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
+import { LocomotiveScrollProvider, useLocomotiveScroll } from 'react-locomotive-scroll'
 import { MdFamilyRestroom } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import { FaHandshake } from "react-icons/fa";
@@ -21,9 +21,8 @@ const Home: FC<[]> = () => {
   let isDown = false;
 
   const handleZoom = (scroll) => {
-    console.log(isDown)
     scroll.on('scroll', (args) => {
-      scrollY = args.scroll.y
+      const scrollY = args.scroll.y
       if (scrollY <= 100 && isDown) {
         isDown = false
         text.current.classList.remove("animate-disappear")
@@ -34,7 +33,6 @@ const Home: FC<[]> = () => {
         text.current.classList.add("animate-disappear")
       }
     })
-
   }
 
 
@@ -58,7 +56,7 @@ const Home: FC<[]> = () => {
       <div data-scroll-container ref={containerRef}>
         <div ref={text} data-scroll-section id="deploying-democracy" className="text-white font-source">
           <FixedContainer className="flex justify-center h-[1100px]">
-            <span data-scroll data-scroll-delay="0.035" data-scroll-speed="-2" className="pt-[400px] hover:scale-110 deploying-democracy-bg bg-[center_top_200px]">
+            <span data-scroll data-scroll-delay="0.035" data-scroll-speed="-4" className="pt-[400px] hover:scale-110 deploying-democracy-bg bg-[center_top_200px]">
               <p className="text-8xl">INDIVISIBLE</p>
               <p className="text-xl">Deploying democracy</p>
             </span>
@@ -163,6 +161,9 @@ const Home: FC<[]> = () => {
             {BENEFITS.join(" | ")}
             </Marquee>
           </FixedContainer>
+        </div>
+        <div data-scroll-section>
+          <Footer/>
         </div>
       </div>
     </LocomotiveScrollProvider>

@@ -19,7 +19,7 @@ const DaoCard: FC<Props> = ({
     dao,
     className,
 }) => {
-    const _class = classNames("w-[350px] h-[450px] text-white", className);
+    const _class = classNames("w-[250px] h-screen text-white", className);
     const _typeClass =
         "bg-black rounded-lg text-xl font-source text-white min-w-max"
 
@@ -33,26 +33,22 @@ const DaoCard: FC<Props> = ({
 
     return (
         <section className={_class}>
+            <Link passHref href={getDaoUrl(dao.slug)}>
             <a>
-                <article className="bg-black px-4 rounded-sm cursor-pointer border border-white">
-                    <div className="flex flex-row justify-between items-center py-4">
-                        <span className={_typeClass}>
-                            DAO
-                        </span>
-                    </div>
-
-                    <div className="relative flex flex-col items-center justify-center mb-4 h-[260px]">
+                <article className="bg-black cursor-pointer rounded-xl h-[320px] p-4">
+                    <div className="flex justify-center h-[200px] border border-white rounded-xl">
                         <Image
                             src={dao.image}
                             alt={`${dao.name} image`}
-                            layout="fill"
+                            width={200}
+                            height={200}
                             //blurDataURL={DEFAULT_IMAGE_PLACEHOLDER}
                             //placeholder="blur"
-                            className="rounded-md object-cover"
+                            className="rounded object-cover "
                         />
                     </div>
 
-                    <div className="flex flex-col my-2 pt-4 justify-between items-start">
+                    <div className="flex flex-col py-4 justify-between items-start">
                         <h3
                             title={dao.name}
                             className="text-lg font-source leading-normal text-white whitespace-nowrap truncate"
@@ -63,21 +59,15 @@ const DaoCard: FC<Props> = ({
                         >
                             <button
                             onClick={join}
-                            className="flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
+                            className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
                         >
                             Join +
                         </button>
-                        <Link passHref href={getDaoUrl(dao.slug)}>
-                        <button
-                            className="flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
-                        >
-                            Visit
-                        </button>
-                        </Link>
                         </div>
                     </div>
                 </article>
             </a>
+            </Link>
         </section>
     );
 };

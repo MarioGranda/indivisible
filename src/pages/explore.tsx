@@ -15,23 +15,20 @@ const Explore: FC<Props> = ({ daos }) => {
 
   const cards = daos.map((dao, i) => (
     <DaoCard
-      className="mr-3 md:mr-10 mt-5 mb-10"
+      className="mt-5"
       itemId={dao.id}
       key={dao.id}
       dao={dao}
     />
   ));
   return (
-    <div>
-    <FixedContainer className="mt-5">
+    <div className="explore-bg bg-cover">
     <Hero dao={daos[0]}/>
-    </FixedContainer>
     <FixedContainer className="mt-5">
-      {/* body */}
       <h2 className="text-white text-center font-source text-4xl my-5">
         Latest DAOs
       </h2>
-      <div className="grid grid-cols-3 gap-10" ref={nftRef}>
+      <div className="grid grid-cols-4 justify-items-center" ref={nftRef}>
         {cards}
       </div>
     </FixedContainer>
