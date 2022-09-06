@@ -15,6 +15,7 @@ export interface Props {
   value?: string | number;
   label?: string;
   className?: string;
+  inputClassName?: string;
   id?: string;
   step?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -27,6 +28,7 @@ export interface Props {
 
 const Input: FC<Props> = ({
   className,
+  inputClassName,
   label,
   name,
   id = name,
@@ -36,38 +38,20 @@ const Input: FC<Props> = ({
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(undefined);
-  let interval; 
-
-  const addStep = () => {
-    inputRef.current.value = (Number(inputRef.current.value) + Number(inputRef.current.step)).toString()
-  }
-
-  const substractStep = (min: number) => {
-    if (Number(inputRef.current.value) > min)
-    inputRef.current.value = (Number(inputRef.current.value) - Number(inputRef.current.step)).toString()
-  }
-
-  const handleOnClick = (up: boolean) => {
-    interval = setInterval(() => {
-      up ? addStep() : substractStep(Number(inputRef.current.min))
-    }, 100);
-  }
-
-  const handleOnUnClick = () => {
-    clearInterval(interval);
-  }
+  const defaultInputClassName = "w-full py-2 px-4 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none"
+  const defaultClassName = "flex flex-row mt-2 border border-white hover:border-green focus:border-green"
 
   const mainInputClass =
     "flex-grow flex align-center items-center py-2 px-2 w-[250px]"
 
   return (
-    <div className={className}>
+    <div>
       {label && (
         <Label id={id}>
           {label}
         </Label>
       )}
-      <div className="flex flex-row mt-2 border border-white hover:border-green focus:border-green">
+      <div className={className ?? defaultClassName}>
         <div className={mainInputClass}>
           <input
             {...props}
@@ -75,7 +59,7 @@ const Input: FC<Props> = ({
             id={id}
             name={name}
             disabled={disabled}
-            className="w-full py-2 px-4 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none"
+            className={inputClassName ?? defaultInputClassName}
             type={type}
             autoComplete="off"
             placeholder={placeholder}

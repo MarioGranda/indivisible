@@ -59,6 +59,17 @@ export interface User {
   avatar: string;
 }
 
+export interface Comment {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  proposalId: number;
+  userAddress: string;
+  text: string;
+  headComment: number;
+  userId: number;
+}
+
 export type TransactionStatus = "SUCCESS" | "PENDING" | "FAILED";
 export interface Notification {
   title: string;

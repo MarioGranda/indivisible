@@ -5,11 +5,13 @@ import FixedContainer from "@/client/layouts/FixedContainer";
 import Image from "next/image";
 import { findProposalsByDaoId } from "@/backend/repositories/proposals";
 import { findUsersByDao } from "@/backend/repositories/user";
+import { getProposalUrl } from "@/shared/utils/createUrls";
+import Link from "next/link";
 
 interface Props {
-    dao: Dao,
-    proposals: Proposal[]
-    topMembers: User[]
+    dao: Dao;
+    proposals: Proposal[];
+    topMembers: User[];
 }
 
 const DaoPage: FC<Props> = ({
@@ -73,18 +75,22 @@ const DaoPage: FC<Props> = ({
                         </ div>
                         {
                             proposals.map((p, i) => (
-                                <div className="grid grid-cols-3 gap-4 w-full border border-white py-2">
-                                    <div className="flex items-center justify-start px-6">{p.name}</div>
-                                    <div className="flex items-center gap-16 justify-center">
-                                        <div className="">{new Date(p.consensusDeadline).toDateString()}</div>
-                                        <div className="">{new Date(p.votingDeadline).toDateString()}</div>
-                                    </div>
-                                    <div className="flex items-center gap-14 justify-end px-8">
-                                        <div>{p.yea}</div>
-                                        <div>{p.nay}</div>
-                                        <div>{p.minQuorum}</div>
-                                    </div>
-                                </ div>
+                                <Link passHref href={getProposalUrl(dao.slug, p.id)}>
+                                    <a >
+                                        <div className="grid grid-cols-3 gap-4 w-full border border-white py-2">
+                                            <div className="flex items-center justify-start px-6">{p.name}</div>
+                                            <div className="flex items-center gap-16 justify-center">
+                                                <div className="">{new Date(p.consensusDeadline).toDateString()}</div>
+                                                <div className="">{new Date(p.votingDeadline).toDateString()}</div>
+                                            </div>
+                                            <div className="flex items-center gap-14 justify-end px-8">
+                                                <div>{p.yea}</div>
+                                                <div>{p.nay}</div>
+                                                <div>{p.minQuorum}</div>
+                                            </div>
+                                        </ div>
+                                    </a>
+                                </Link>
                             ))
                         }
                     </div>

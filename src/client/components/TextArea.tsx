@@ -7,6 +7,7 @@ export interface Props {
   value?: string;
   label?: string;
   className?: string;
+  inputClassname?: string;
   id?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   required?: boolean;
@@ -15,6 +16,7 @@ export interface Props {
 
 const TextArea: FC<Props> = ({
   className,
+  inputClassname,
   label,
   name,
   id = name,
@@ -26,8 +28,8 @@ const TextArea: FC<Props> = ({
   const placeholder = hasFocus ? "" : props.placeholder;
 
   const mainInputClass = 
-    "flex-grow flex align-center items-center py-2 bg-black text-white rounded-[0.35rem]"
-  const inputClassNames =
+    "flex-grow flex align-center items-center py-2 text-white rounded-[0.35rem]"
+  const defaultInputClassname =
     "placeholder-gray-300 bg-black text-white text-13 py-2 px-4 border border-white font-source w-full hover:border-green focus:outline-none focus:border-green"
 
   return (
@@ -45,7 +47,7 @@ const TextArea: FC<Props> = ({
             name={name}
             onBlur={() => setFocus(false)}
             onFocus={() => setFocus(true)}
-            className={inputClassNames}
+            className={inputClassname ?? defaultInputClassname}
             autoComplete="off"
             placeholder={placeholder}
           />

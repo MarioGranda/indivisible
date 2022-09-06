@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 const BaseLayout = ({ children }: { children: ReactNode }) => {
 
   return (
-    <div className="flex flex-col justify-between bg-black min-h-screen">
+    <div className="flex flex-col justify-between bg-black">
       {/* <Notification /> */}
       <NavBar />
       <main>{children}</main>
