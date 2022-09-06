@@ -4,10 +4,10 @@ import { slugify } from "@/shared/utils/strings";
 
 function getCredentials() {
     return {
-      region: process.env.AWS_REGION ?? "",
+      region: process.env.INDV_AWS_REGION ?? "",
       credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY ?? "",
-        secretAccessKey: process.env.AWS_ACCESS_SECRET ?? "",
+        accessKeyId: process.env.INDV_AWS_ACCESS_KEY ?? "",
+        secretAccessKey: process.env.INDV_AWS_ACCESS_SECRET ?? "",
       },
     };
   }
