@@ -21,7 +21,7 @@ const FileInput: FC<Props> = ({
   id = name,
   onFileChange,
   contentFile,
-  size = 50
+  size = 50,
 }) => {
   const fileRef = useRef<HTMLInputElement>(null);
 

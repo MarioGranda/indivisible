@@ -18,5 +18,4 @@ export function getEvent(
   return event;
 }
 
-export const DaoCreatedEvent =
-  "DAOCreated(address,address)";
+export const DaoCreatedEvent = "DAOCreated(address,address)";

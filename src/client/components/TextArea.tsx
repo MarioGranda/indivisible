@@ -27,10 +27,10 @@ const TextArea: FC<Props> = ({
   // Clear placeholder on focus & restore when on blur
   const placeholder = hasFocus ? "" : props.placeholder;
 
-  const mainInputClass = 
-    "flex-grow flex align-center items-center py-2 text-white rounded-[0.35rem]"
+  const mainInputClass =
+    "flex-grow flex align-center items-center py-2 text-white rounded-[0.35rem]";
   const defaultInputClassname =
-    "placeholder-gray-300 bg-black text-white text-13 py-2 px-4 border border-white font-source w-full hover:border-green focus:outline-none focus:border-green"
+    "placeholder-gray-300 bg-black text-white text-13 py-2 px-4 border border-white font-source w-full hover:border-green focus:outline-none focus:border-green";
 
   return (
     <div className={className}>

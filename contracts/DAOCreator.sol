@@ -18,18 +18,26 @@ contract DAOCreator is
     address public beaconDAO;
     address public beaconToken;
 
-    event DAOCreated(
-        address indexed daoCreator,
-        address indexed dao
-    );
+    event DAOCreated(address indexed daoCreator, address indexed dao);
 
-    function initialize(address admin, address _beaconDAO, address _beaconToken) public initializer {
+    function initialize(
+        address admin,
+        address _beaconDAO,
+        address _beaconToken
+    ) public initializer {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         beaconDAO = _beaconDAO;
         beaconToken = _beaconToken;
     }
 
-    function createDAO(string memory _name, string memory _symbol, uint256 _mintAmount, uint32 _minConsensusPeriod, uint32 _minVotingPeriod, uint32 _minQuorum) external {
+    function createDAO(
+        string memory _name,
+        string memory _symbol,
+        uint256 _mintAmount,
+        uint32 _minConsensusPeriod,
+        uint32 _minVotingPeriod,
+        uint32 _minQuorum
+    ) external {
         BeaconProxy dao = new BeaconProxy(
             beaconDAO,
             abi.encodeWithSignature(
@@ -38,7 +46,7 @@ contract DAOCreator is
                 beaconToken,
                 _name,
                 _symbol,
-                _mintAmount, 
+                _mintAmount,
                 _minConsensusPeriod,
                 _minVotingPeriod,
                 _minQuorum

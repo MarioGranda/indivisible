@@ -10,8 +10,7 @@ interface Props {
 const Label: FC<Props> = ({ id, children, className, hasFocus = false }) => (
   <label
     htmlFor={id}
-    className=
-      "text-13 text-white font-source leading-normal font-medium"
+    className="text-13 text-white font-source leading-normal font-medium"
   >
     {children}
   </label>

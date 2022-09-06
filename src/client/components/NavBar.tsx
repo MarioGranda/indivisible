@@ -5,36 +5,36 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import FixedContainer from "../layouts/FixedContainer";
 
-
 const NavBar = () => {
-  const [userWallet, setUserWallet] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [userWallet, setUserWallet] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getAccount = async () => {
       const provider = getProvider();
-    provider.send("eth_accounts", []).then((accounts) => setUserWallet(accounts[0]));
-    }
+      provider
+        .send("eth_accounts", [])
+        .then((accounts) => setUserWallet(accounts[0]));
+    };
     getAccount();
-    setIsLoading(false)
+    setIsLoading(false);
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", getAccount);
       return () =>
         window.ethereum.removeListener("accountsChanged", getAccount);
     }
-  }, [])
+  }, []);
 
   const connectWallet = async () => {
     if (userWallet) {
       return;
     }
-    const provider = getProvider()
+    const provider = getProvider();
     const accounts = await provider.send("eth_requestAccounts", []);
     if (accounts.length === 0) {
       return;
     }
-    setUserWallet(accounts[0])
-
-  }
+    setUserWallet(accounts[0]);
+  };
 
   return (
     <header className="bg-black border border-b-gray sticky top-0 z-10">
@@ -45,7 +45,9 @@ const NavBar = () => {
               <Link passHref href="/">
                 <a>
                   <div className="self-center cursor-pointer">
-                    <p className="font-source font-bold text-xl">INDIVISIBLE DAO</p>
+                    <p className="font-source font-bold text-xl">
+                      INDIVISIBLE DAO
+                    </p>
                   </div>
                 </a>
               </Link>
@@ -65,11 +67,18 @@ const NavBar = () => {
               </Link>
             </div>
             <div className="place-self-end mb-1.5">
-              {!isLoading &&
-                <button className="text-white border hover:border-green hover:text-green px-7 py-3" onClick={connectWallet}>
-                  <p className="font-source">{userWallet ? parseEthAddress(userWallet) : "Connect Wallet"}</p>
+              {!isLoading && (
+                <button
+                  className="text-white border hover:border-green hover:text-green px-7 py-3"
+                  onClick={connectWallet}
+                >
+                  <p className="font-source">
+                    {userWallet
+                      ? parseEthAddress(userWallet)
+                      : "Connect Wallet"}
+                  </p>
                 </button>
-              }
+              )}
             </div>
           </div>
         </nav>

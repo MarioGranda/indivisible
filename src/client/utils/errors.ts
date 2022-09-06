@@ -23,7 +23,6 @@ export interface MetamaskError {
   transaction?: unknown;
 }
 
-
 const isContractError = (error: unknown): error is ContractError => {
   return error instanceof Error && "code" in error;
 };

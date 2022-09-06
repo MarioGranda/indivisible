@@ -38,19 +38,17 @@ const Input: FC<Props> = ({
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(undefined);
-  const defaultInputClassName = "w-full py-2 px-4 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none"
-  const defaultClassName = "flex flex-row mt-2 border border-white hover:border-green focus:border-green"
+  const defaultInputClassName =
+    "w-full py-2 px-4 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none";
+  const defaultClassName =
+    "flex flex-row mt-2 border border-white hover:border-green focus:border-green";
 
   const mainInputClass =
-    "flex-grow flex align-center items-center py-2 px-2 w-[250px]"
+    "flex-grow flex align-center items-center py-2 px-2 w-[250px]";
 
   return (
     <div>
-      {label && (
-        <Label id={id}>
-          {label}
-        </Label>
-      )}
+      {label && <Label id={id}>{label}</Label>}
       <div className={className ?? defaultClassName}>
         <div className={mainInputClass}>
           <input

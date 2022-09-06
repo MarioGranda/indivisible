@@ -3,14 +3,13 @@ import mysql, { Pool } from "mysql2/promise";
 let pool: Promise<Pool>;
 
 const createPool = async () => {
-
-   const connection = {
-      port: Number(process.env.DB_PORT ?? 3306),
-      username: process.env.DB_USER ?? "",
-      password: process.env.DB_PASSWORD ?? "",
-      host: process.env.DB_HOST ?? "",
-      dbname: process.env.DB_DATABASE ?? "",
-    };
+  const connection = {
+    port: Number(process.env.DB_PORT ?? 3306),
+    username: process.env.DB_USER ?? "",
+    password: process.env.DB_PASSWORD ?? "",
+    host: process.env.DB_HOST ?? "",
+    dbname: process.env.DB_DATABASE ?? "",
+  };
 
   return mysql.createPool({
     host: connection.host,

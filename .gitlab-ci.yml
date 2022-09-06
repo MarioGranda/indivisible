@@ -1,0 +1,18 @@
+image: node:16.13
+
+stages:
+  - test
+  - pre-deploy
+  - deploy
+
+Lint / Code format:
+  stage: test
+  script:
+    - npm i
+    - npx hardhat compile
+    - npm run lint
+    - npm run prettier
+    - npm test --coverage
+    - npm run typescript
+    - npm run solhint
+  coverage: /All files\s*\|\s*([\d\.]+)/

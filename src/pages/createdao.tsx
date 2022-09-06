@@ -9,27 +9,27 @@ import { useDispatch } from "react-redux";
 import getProvider from "@/shared/utils/getProvider";
 import { deployDao } from "@/client/utils/createDao";
 import { CreateDaoInput } from "@/shared/validators/createDao";
-import { openPendingTransactionNotification, openTransactionCompleteNotification } from "@/client/redux/actions/notification";
+import {
+  openPendingTransactionNotification,
+  openTransactionCompleteNotification,
+} from "@/client/redux/actions/notification";
 import { useNotification } from "@/client/redux/selectors";
 import Notification from "@/client/components/Notification";
 
-interface Props {
+interface Props {}
 
-}
-
-export const CreateItem: FC<Props> = ({ }) => {
+export const CreateItem: FC<Props> = ({}) => {
   const [daoImage, setDaoImage] = useState<ContentFileType | null>(null);
   const [tokenImage, setTokenImage] = useState<ContentFileType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const notification = useNotification();
 
   useEffect(() => {
     if (daoImage?.image?.preview) {
-      dispatch(openPendingTransactionNotification(daoImage.image.preview))
+      dispatch(openPendingTransactionNotification(daoImage.image.preview));
     }
-    
-  }, [daoImage])
+  }, [daoImage]);
 
   const [formInput, setFormInput] = useState({
     name: "",
@@ -40,8 +40,8 @@ export const CreateItem: FC<Props> = ({ }) => {
     minVotingPeriod: undefined,
     minConsensusPeriod: undefined,
     mintAmount: undefined,
-    daoImage: "", 
-    tokenImage: ""
+    daoImage: "",
+    tokenImage: "",
   });
 
   const validationResult = CreateDaoInput.safeParse(formInput);
@@ -54,34 +54,33 @@ export const CreateItem: FC<Props> = ({ }) => {
           const imageFile = Array.from(files).filter((file) =>
             file.type.startsWith("image")
           )[0];
-          console.log(event)
+          console.log(event);
           if (event.target.name === "DaoImageInput") {
-          setDaoImage({
-            image: {
-              file: imageFile,
-              preview: URL.createObjectURL(imageFile),
-            }
-          });
-          setFormInput((prev) => ({
-            ...prev,
-            daoImage: imageFile.name,
-          }));
-        } else {
-          setTokenImage({
-            image: {
-              file: imageFile,
-              preview: URL.createObjectURL(imageFile),
-            }
-          });
-          setFormInput((prev) => ({
-            ...prev,
-            tokenImage: imageFile.name,
-          }));
-        }
-
+            setDaoImage({
+              image: {
+                file: imageFile,
+                preview: URL.createObjectURL(imageFile),
+              },
+            });
+            setFormInput((prev) => ({
+              ...prev,
+              daoImage: imageFile.name,
+            }));
+          } else {
+            setTokenImage({
+              image: {
+                file: imageFile,
+                preview: URL.createObjectURL(imageFile),
+              },
+            });
+            setFormInput((prev) => ({
+              ...prev,
+              tokenImage: imageFile.name,
+            }));
+          }
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         // await dispatch(
         //   openNotification({
         //     title: "Error",
@@ -101,7 +100,7 @@ export const CreateItem: FC<Props> = ({ }) => {
       ...prev,
       [name]: parseInt(value),
     }));
-    console.log(formInput)
+    console.log(formInput);
   };
 
   const handleFormInputString = (
@@ -123,9 +122,8 @@ export const CreateItem: FC<Props> = ({ }) => {
       //     status: "PENDING",
       //   })
       // );
-      console.log(formInput)
+      console.log(formInput);
       if (daoImage && tokenImage) {
-        
         const signedUrlInput = {
           daoName: formInput.name,
           tokenName: formInput.tokenName,
@@ -146,10 +144,10 @@ export const CreateItem: FC<Props> = ({ }) => {
           },
         } = await axios.post("/api/s3/signed-url", signedUrlInput);
         const daoImagePromise = axios.put(daoResult.url, daoImage.image.file, {
-              headers: {
-                "Content-type": daoImage.image.file.type,
-              },
-            });
+          headers: {
+            "Content-type": daoImage.image.file.type,
+          },
+        });
 
         const tokenImagePromise = axios.put(
           tokenResult.url,
@@ -162,7 +160,7 @@ export const CreateItem: FC<Props> = ({ }) => {
         );
 
         await Promise.all([daoImagePromise, tokenImagePromise]);
-        
+
         // await dispatch(
         //   openNotification({
         //     title: "Creating FullTrack",
@@ -170,14 +168,12 @@ export const CreateItem: FC<Props> = ({ }) => {
         //     status: "PENDING",
         //   })
         // );
-        await dispatch(openPendingTransactionNotification(daoImage.image.preview))
-        
-        const {
-          daoAddress,
-          transactionHash,
-          status,
-          daoCreatorAddress
-      } = await deployDao(formInput, getProvider())
+        await dispatch(
+          openPendingTransactionNotification(daoImage.image.preview)
+        );
+
+        const { daoAddress, transactionHash, status, daoCreatorAddress } =
+          await deployDao(formInput, getProvider());
 
         await axios.post(
           "/api/create-dao",
@@ -195,8 +191,10 @@ export const CreateItem: FC<Props> = ({ }) => {
             },
           }
         );
-        const result = { status, transactionHash }
-        await dispatch(openTransactionCompleteNotification(result, daoImage.image.preview))
+        const result = { status, transactionHash };
+        await dispatch(
+          openTransactionCompleteNotification(result, daoImage.image.preview)
+        );
         //if (status === 1) {
         //   await dispatch(
         //     openNotification({
@@ -227,12 +225,11 @@ export const CreateItem: FC<Props> = ({ }) => {
       //     status: "FAILED",
       //   })
       // );
-      console.log(error)
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <FixedContainer className="flex flex-wrap-reverse justify-center gap-5 my-20">
@@ -260,15 +257,15 @@ export const CreateItem: FC<Props> = ({ }) => {
           onChange={handleFormInputString}
           placeholder="DAO description"
         />
-  
+
         <h2 className="text-3xl font-source font-bold">Token</h2>
         <FileInput
-            name="TokenImageInput"
-            onFileChange={onFileChange}
-            contentFile={tokenImage}
-            className="flex items-center justify-center border-4 rounded-full border-white w-[100px] h-[100px] p-5"
-            size={35}
-          />
+          name="TokenImageInput"
+          onFileChange={onFileChange}
+          contentFile={tokenImage}
+          className="flex items-center justify-center border-4 rounded-full border-white w-[100px] h-[100px] p-5"
+          size={35}
+        />
         <div className="flex gap-7">
           <Input
             name="tokenName"
@@ -332,7 +329,7 @@ export const CreateItem: FC<Props> = ({ }) => {
             placeholder="Min quorum"
             step={1}
             min={0}
-          />          
+          />
         </div>
         <button
           onClick={createDao}
@@ -348,4 +345,3 @@ export const CreateItem: FC<Props> = ({ }) => {
 };
 
 export default CreateItem;
-

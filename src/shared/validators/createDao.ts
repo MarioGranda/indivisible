@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { ETHEREUM_ADDRESS_REGEX } from "../constants/ethRegexAddress";
 
-
 //S3
 export const CreateDaoInput = z
   .object({
@@ -13,9 +12,9 @@ export const CreateDaoInput = z
     minVotingPeriod: z.number().min(1),
     minConsensusPeriod: z.number().min(1),
     mintAmount: z.number().min(1),
-    daoCreatorAddress:  z.string().regex(ETHEREUM_ADDRESS_REGEX),
-    tokenImage:  z.string().min(1).max(255),
-    daoImage:  z.string().min(1).max(255),
+    daoCreatorAddress: z.string().regex(ETHEREUM_ADDRESS_REGEX),
+    tokenImage: z.string().min(1).max(255),
+    daoImage: z.string().min(1).max(255),
     daoAddress: z.string().regex(ETHEREUM_ADDRESS_REGEX),
     transactionHash: z.string().min(1).max(255),
   })

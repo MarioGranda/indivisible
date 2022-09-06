@@ -18,6 +18,6 @@ export const daoMapper = (result: Record<string, any>): Dao => {
     minVotingDeadline: result.min_voting_deadline,
     transactionHash: result.transaction_hash,
     createdAt: result.created_at.toJSON(),
-    updatedAt: result.updated_at.toJSON()
+    updatedAt: result.updated_at.toJSON(),
   };
 };

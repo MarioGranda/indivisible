@@ -5,14 +5,13 @@ export interface ContentFileType {
   };
 }
 
-
 export interface TransactionInput {
   from: string;
   logs: {
     address: string;
     blockHash: string;
     topics: string[];
-  }[]
+  }[];
   transactionHash: string;
 }
 

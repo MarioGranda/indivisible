@@ -7,9 +7,7 @@ const middlewares = [reduxThunk];
 
 const store = createStore(
   reducers,
-  composeWithDevTools(
-    applyMiddleware(...middlewares)
-  )
+  composeWithDevTools(applyMiddleware(...middlewares))
 );
 
 export default store;

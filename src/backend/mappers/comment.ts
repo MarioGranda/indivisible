@@ -10,7 +10,6 @@ export const commentMapper = (result: Record<string, any>): Comment => {
     headComment: result.head_comment,
     userId: result.user_id,
     createdAt: result.created_at.toJSON(),
-    updatedAt: result.updated_at.toJSON()
+    updatedAt: result.updated_at.toJSON(),
   };
 };
-

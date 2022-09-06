@@ -7,6 +7,6 @@ export const userMapper = (result: Record<string, any>): User => {
     address: result.address,
     avatar: result.avatar,
     createdAt: result.created_at.toJSON(),
-    updatedAt: result.updated_at.toJSON()
+    updatedAt: result.updated_at.toJSON(),
   };
 };

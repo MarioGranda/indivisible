@@ -1,7 +1,8 @@
-import { isMetamaskError, getRevertedTransactionMessage } from "@/client/utils/errors";
 import {
-  Notification,
-} from "@/shared/models/index";
+  isMetamaskError,
+  getRevertedTransactionMessage,
+} from "@/client/utils/errors";
+import { Notification } from "@/shared/models/index";
 
 export type ActionType = ReturnType<
   typeof openNotification | typeof closeNotification
@@ -25,7 +26,7 @@ export const openPendingTransactionNotification = (image: string) => {
   return openNotification({
     title: "Your transaction is being processed",
     status: "PENDING",
-    image: image
+    image: image,
   });
 };
 
@@ -40,14 +41,14 @@ export const openWaitForCountDownNotification = () => {
   });
 };
 
-
 export const openTransactionCompleteNotification = (
   result: any,
   image: string
 ) => {
   const { status, transactionHash } = result;
   return openNotification({
-    title: status === 1 ? "DAO createad successfully" : "Oops! Something went wrong",
+    title:
+      status === 1 ? "DAO createad successfully" : "Oops! Something went wrong",
     status: status === 1 ? "SUCCESS" : "FAILED",
     description: "",
     transactionHash: transactionHash,

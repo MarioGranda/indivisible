@@ -9,8 +9,7 @@ const getProvider = () => {
     provider = new ethers.providers.JsonRpcProvider(
       `https://polygon-${network}.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`
     );
-  }
-  else {
+  } else {
     provider = new ethers.providers.Web3Provider(window.ethereum);
   }
   return provider;

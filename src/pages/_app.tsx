@@ -17,7 +17,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
           <TopProgressBar />
           <Component {...pageProps} />
         </BaseLayout>
-        </Provider>
+      </Provider>
     </>
   );
 };

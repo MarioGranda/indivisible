@@ -3,14 +3,14 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { slugify } from "@/shared/utils/strings";
 
 function getCredentials() {
-    return {
-      region: process.env.INDV_AWS_REGION ?? "",
-      credentials: {
-        accessKeyId: process.env.INDV_AWS_ACCESS_KEY ?? "",
-        secretAccessKey: process.env.INDV_AWS_ACCESS_SECRET ?? "",
-      },
-    };
-  }
+  return {
+    region: process.env.INDV_AWS_REGION ?? "",
+    credentials: {
+      accessKeyId: process.env.INDV_AWS_ACCESS_KEY ?? "",
+      secretAccessKey: process.env.INDV_AWS_ACCESS_SECRET ?? "",
+    },
+  };
+}
 
 export const generateSignedUrl = async (path: string, contentType: string) => {
   const credentials = getCredentials();
@@ -27,23 +27,23 @@ export const generateSignedUrl = async (path: string, contentType: string) => {
 export const getTokenImageSignedUrl = async (
   tokenName: string,
   extension: string,
-  contentType: string,
+  contentType: string
 ) => {
   const date = new Date();
-  const path = `token/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}/${slugify(
-    tokenName
-  )}/image${extension}`;
+  const path = `token/${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()}/${slugify(tokenName)}/image${extension}`;
   return generateSignedUrl(path, contentType);
 };
 
 export const getDaoImageSignedUrl = async (
   daoName: string,
   extension: string,
-  contentType: string,
+  contentType: string
 ) => {
   const date = new Date();
-  const path = `dao/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}/${slugify(
-    daoName
-  )}/image${extension}`;
+  const path = `dao/${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()}/${slugify(daoName)}/image${extension}`;
   return generateSignedUrl(path, contentType);
 };

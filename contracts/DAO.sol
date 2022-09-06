@@ -15,7 +15,6 @@ You should have received a copy of the GNU lesser General Public License
 along with the DAO.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 /*
 Standard smart contract for a Decentralized Autonomous Organization (DAO)
 to automate organizational governance and decision-making.
@@ -82,15 +81,22 @@ contract DAO is AccessControlUpgradeable {
     );
     event ProposalExecuted(
         uint256 indexed proposalID,
-        bool indexed proposalPassed 
+        bool indexed proposalPassed
     );
-    event Voted(uint indexed proposalID, bool position, address indexed voter);
+    event Voted(
+        uint256 indexed proposalID,
+        bool position,
+        address indexed voter
+    );
     event NewMember(address indexed newMember);
 
     // Modifier that allows only shareholders to vote and create new proposals
     modifier onlyTokenholders(address _token, bytes32[] calldata _merkleProof) {
         if (Token(_token).owner() != address(this)) {
-            require(_verify(_merkleProof, Token(_token).owner()), "DAO: Token does not belong to any subDao");
+            require(
+                _verify(_merkleProof, Token(_token).owner()),
+                "DAO: Token does not belong to any subDao"
+            );
         }
         require(
             Token(_token).balanceOf(msg.sender) > 0,
@@ -99,17 +105,22 @@ contract DAO is AccessControlUpgradeable {
         _;
     }
 
-    function initialize(address _creator, address _beacon, string memory _name, string memory _symbol, uint256 _mintAmount, uint32 _minConsensusPeriod, uint32 _minVotingPeriod, uint32 _minQuorum) public initializer {
+    function initialize(
+        address _creator,
+        address _beacon,
+        string memory _name,
+        string memory _symbol,
+        uint256 _mintAmount,
+        uint32 _minConsensusPeriod,
+        uint32 _minVotingPeriod,
+        uint32 _minQuorum
+    ) public initializer {
         _grantRole(DEFAULT_ADMIN_ROLE, _creator);
         //_grantRole("CURATOR_ROLE", _curator);
         _grantRole(CREATOR_ROLE, _creator);
         BeaconProxy _token = new BeaconProxy(
             _beacon,
-            abi.encodeWithSignature(
-                "initialize(string,string)",
-                _name,
-                _symbol
-            )
+            abi.encodeWithSignature("initialize(string,string)", _name, _symbol)
         );
         token = address(_token);
         mintAmount = _mintAmount;
@@ -118,18 +129,16 @@ contract DAO is AccessControlUpgradeable {
         minQuorum = _minQuorum;
     }
 
-
     function receiveEther() external pure returns (bool) {
         return true;
     }
 
     function join() external {
-        require(!isUser[msg.sender] , "DAO: msg.sender is already a user");
+        require(!isUser[msg.sender], "DAO: msg.sender is already a user");
         isUser[msg.sender] = true;
         Token(token).mint(msg.sender, mintAmount);
         emit NewMember(msg.sender);
     }
-
 
     function newProposal(
         uint256 _debatingPeriod,
@@ -137,10 +146,23 @@ contract DAO is AccessControlUpgradeable {
         uint32 _minQuorum,
         address _token,
         bytes32[] calldata _merkleProof
-    ) onlyTokenholders(_token, _merkleProof) external returns (uint256 _proposalID) {
-        require(_debatingPeriod >= minConsensusPeriod, "DAO: debating period must be greater than minConsensusPeriod");
-        require(_votingPeriod >= minVotingPeriod, "DAO: voting period must be greater than minVotingPeriod");
-        require(_minQuorum >= minQuorum, "DAO: min quorum must be greater than minQuorum");
+    )
+        external
+        onlyTokenholders(_token, _merkleProof)
+        returns (uint256 _proposalID)
+    {
+        require(
+            _debatingPeriod >= minConsensusPeriod,
+            "DAO: debating period must be greater than minConsensusPeriod"
+        );
+        require(
+            _votingPeriod >= minVotingPeriod,
+            "DAO: voting period must be greater than minVotingPeriod"
+        );
+        require(
+            _minQuorum >= minQuorum,
+            "DAO: min quorum must be greater than minQuorum"
+        );
         proposals[_proposalIds.current()] = Proposal({
             consensusDeadline: block.timestamp + _debatingPeriod,
             votingDeadline: block.timestamp + _debatingPeriod + _votingPeriod,
@@ -164,24 +186,39 @@ contract DAO is AccessControlUpgradeable {
         );
     }
 
-
     function vote(
         uint256 _proposalID,
         bool _supportsProposal,
         uint256 _depositAmount,
-        uint256 _lockPeriod, 
+        uint256 _lockPeriod,
         address _token,
         bytes32[] calldata _merkleProof
-    ) onlyTokenholders(_token, _merkleProof) external {
-        require(_proposalIds.current() > _proposalID, "DAO: Non existent proposal id");
+    ) external onlyTokenholders(_token, _merkleProof) {
+        require(
+            _proposalIds.current() > _proposalID,
+            "DAO: Non existent proposal id"
+        );
         Proposal storage p = proposals[_proposalID];
         //check inputs
-        uint256 quorum = (10_000 * (p.deposited + _depositAmount)) / Token(token).totalSupply();
-        require(block.timestamp >= p.consensusDeadline, "DAO: Voting has not started yet");
-        require(block.timestamp <= p.votingDeadline || p.minQuorum > quorum , "DAO: Voting has finished");
+        uint256 quorum = (10_000 * (p.deposited + _depositAmount)) /
+            Token(token).totalSupply();
+        require(
+            block.timestamp >= p.consensusDeadline,
+            "DAO: Voting has not started yet"
+        );
+        require(
+            block.timestamp <= p.votingDeadline || p.minQuorum > quorum,
+            "DAO: Voting has finished"
+        );
         require(_depositAmount > 0, "DAO: Deposit has to be greater than 0");
-        require(Token(token).allowance(msg.sender, address(this)) >= _depositAmount, "DAO: Invalid token allowance");
-        require(depositedAmount[msg.sender][_proposalID] == 0, "DAO: User has already voted");
+        require(
+            Token(token).allowance(msg.sender, address(this)) >= _depositAmount,
+            "DAO: Invalid token allowance"
+        );
+        require(
+            depositedAmount[msg.sender][_proposalID] == 0,
+            "DAO: User has already voted"
+        );
 
         uint256 _votePower = _depositAmount * _lockPeriod;
         depositedAmount[msg.sender][_proposalID] = _depositAmount;
@@ -196,37 +233,53 @@ contract DAO is AccessControlUpgradeable {
         emit Voted(_proposalID, _supportsProposal, msg.sender);
     }
 
-
-    function executeProposal(
-        uint256 _proposalID
-    ) external {
-        require(_proposalIds.current() > _proposalID, "DAO: Non existent proposal id");
+    function executeProposal(uint256 _proposalID) external {
+        require(
+            _proposalIds.current() > _proposalID,
+            "DAO: Non existent proposal id"
+        );
         Proposal memory p = proposals[_proposalID];
 
         // Check if the proposal can be executed
-        require(p.creator == msg.sender, "DAO: Only proposal creator can execute this proposal");
-        require(block.timestamp >= p.votingDeadline, "DAO: Voting has not finished yet");
+        require(
+            p.creator == msg.sender,
+            "DAO: Only proposal creator can execute this proposal"
+        );
+        require(
+            block.timestamp >= p.votingDeadline,
+            "DAO: Voting has not finished yet"
+        );
 
         uint256 quorum = (10_000 * p.deposited) / Token(token).totalSupply();
-        require(quorum >= _getQuorum(_proposalID), "DAO: Quorum must be greater than proposal's minQuorum");   
+        require(
+            quorum >= _getQuorum(_proposalID),
+            "DAO: Quorum must be greater than proposal's minQuorum"
+        );
         p.proposalPassed = p.yea > p.nay ? true : false;
         _closeProposal(_proposalID);
 
         emit ProposalExecuted(_proposalID, p.proposalPassed);
     }
 
-    function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyRole(CREATOR_ROLE) {
+    function updateMerkleRoot(bytes32 _newMerkleRoot)
+        external
+        onlyRole(CREATOR_ROLE)
+    {
         merkleRoot = _newMerkleRoot;
     }
 
     //Verify subDAO is under this DAO governance in case merkleRoot != ""
-    function _verify(bytes32[] calldata _merkleProof, address _subDAO) view internal returns (bool) {
-            if (merkleRoot != "") {
-                bytes32 leaf = keccak256(abi.encodePacked(_subDAO));
-                return MerkleProof.verify(_merkleProof, merkleRoot, leaf);
-            } else {
-                return true;
-            }
+    function _verify(bytes32[] calldata _merkleProof, address _subDAO)
+        internal
+        view
+        returns (bool)
+    {
+        if (merkleRoot != "") {
+            bytes32 leaf = keccak256(abi.encodePacked(_subDAO));
+            return MerkleProof.verify(_merkleProof, merkleRoot, leaf);
+        } else {
+            return true;
+        }
     }
 
     function _getQuorum(uint256 _proposalID) internal view returns (uint32) {
@@ -234,28 +287,33 @@ contract DAO is AccessControlUpgradeable {
         return p.minQuorum;
     }
 
-
     function _closeProposal(uint256 _proposalID) internal {
         Proposal storage p = proposals[_proposalID];
         if (p.open) {
-        p.open = false;
+            p.open = false;
         }
     }
-
 
     function getMyFunds(uint256 _proposalID) external {
         require(_withdrawFunds(_proposalID), "DAO: Withdraw funds failed");
     }
 
-
-    function _withdrawFunds(uint256 _proposalID) internal returns (bool _success) {
-        require(_proposalIds.current() > _proposalID, "DAO: Non existent proposal id");
+    function _withdrawFunds(uint256 _proposalID)
+        internal
+        returns (bool _success)
+    {
+        require(
+            _proposalIds.current() > _proposalID,
+            "DAO: Non existent proposal id"
+        );
         Proposal memory p = proposals[_proposalID];
         require(p.open == false, "DAO: Proposal has not been closed yet");
         uint256 _depositedAmount = depositedAmount[msg.sender][_proposalID];
-        require(_depositedAmount > 0, "DAO: No deposit was made for this proposal");
+        require(
+            _depositedAmount > 0,
+            "DAO: No deposit was made for this proposal"
+        );
         Token(token).transfer(msg.sender, _depositedAmount);
         return true;
     }
-
 }

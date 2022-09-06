@@ -15,6 +15,6 @@ export const proposalMapper = (result: Record<string, any>): Proposal => {
     nay: result.nay,
     status: result.status,
     createdAt: result.created_at.toJSON(),
-    updatedAt: result.updated_at.toJSON()
+    updatedAt: result.updated_at.toJSON(),
   };
 };
