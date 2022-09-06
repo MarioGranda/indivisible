@@ -201,7 +201,7 @@ const Home: FC<[]> = () => {
                 Participatory economics
               </h3>
               <p className="text-xl">
-                Equity, solidarity, diversity, workers' self-management,
+                Equity, solidarity, diversity, workers&apos; self-management,
                 efficiency (defined as accomplishing goals without wasting
                 valued assets) and sustainability..
               </p>

@@ -12,7 +12,8 @@ describe("DAO withdrawFunds tests", async function () {
     daoAddress,
     tokenAddress,
     voter,
-    token;
+    token,
+    deployer;
   let DAO, Token;
   let consensusPeriod, votingPeriod, proposalID, depositAmount;
   const name = "HOAs";

@@ -1,7 +1,5 @@
 import React, { FC, useState } from "react";
 import Label from "./Label";
-import { BiUpArrow, BiDownArrow } from "react-icons/bi";
-
 export interface Props {
   name: string;
   value?: string;

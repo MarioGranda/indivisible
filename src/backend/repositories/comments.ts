@@ -1,5 +1,5 @@
 import { TABLE_NAMES } from "@/shared/constants/tableNames";
-import { Comment, Proposal } from "@/shared/models";
+import { Comment } from "@/shared/models";
 import { getPool } from "../services/database";
 import { RowDataPacket } from "mysql2/promise";
 import { commentMapper } from "../mappers/comment";

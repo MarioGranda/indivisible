@@ -1,46 +1,29 @@
 import { findCommentsByProposalId } from "@/backend/repositories/comments";
 import { findProposal } from "@/backend/repositories/proposals";
-import Input from "@/client/components/Input";
 import Post from "@/client/components/Post";
 import TextArea from "@/client/components/TextArea";
 import FixedContainer from "@/client/layouts/FixedContainer";
-import { Comment, Proposal } from "@/shared/models";
+import { Comment } from "@/shared/models";
 import React, {
-  ChangeEvent,
   FC,
-  MouseEventHandler,
-  useCallback,
   useState,
 } from "react";
 import { MdOutlineAdd } from "react-icons/md";
 
 interface Props {
-  proposal: Proposal;
   comments: Comment[];
 }
 
-const Proposal: FC<Props> = ({ proposal, comments }) => {
+const Proposal: FC<Props> = ({ comments }) => {
   const [isNewComment, setIsNewComment] = useState<boolean>(false);
   const [newComment, setNewComment] = useState(null);
 
   const postClassName =
     "bg-gray-dark text-white text-13 p-4 rounded-xl w-full outline-none";
 
-  const posts = comments.map((comment, i) => (
-    <Post comment={comment} className={postClassName} />
+  const posts = comments.map((comment) => (
+    <Post key={comment.id} comment={comment} className={postClassName} />
   ));
-
-  // const onInputChange = useCallback(
-  //     (e: ChangeEvent<HTMLInputElement>) => {
-  //         setNewComment((state) => ({
-  //             ...state,
-  //             [e.target.name]: e.target.value,
-  //         }));
-  //     },
-  //     [setNewComment]
-  // );
-
-  const addComment = () => {};
 
   return (
     <div className="explore-bg bg-cover text-white font-source min-h-screen">
@@ -79,7 +62,6 @@ export const getServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      proposal,
       comments,
     },
   };

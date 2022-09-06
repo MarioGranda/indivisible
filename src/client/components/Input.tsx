@@ -1,5 +1,4 @@
-import React, { FC, ReactNode, useRef, useState } from "react";
-import { BiDownArrow, BiUpArrow } from "react-icons/bi";
+import React, { FC, useRef } from "react";
 import Label from "./Label";
 
 type Type =

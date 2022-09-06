@@ -12,7 +12,8 @@ describe("DAO executeProposal tests", async function () {
     daoAddress,
     tokenAddress,
     voter,
-    token;
+    token,
+    deployer;
   let DAO, Token;
   let consensusPeriod, votingPeriod;
   const name = "HOAs";

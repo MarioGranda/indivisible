@@ -17,8 +17,6 @@ interface Props {
 
 const DaoCard: FC<Props> = ({ dao, className }) => {
   const _class = classNames("w-[250px] h-screen text-white", className);
-  const _typeClass =
-    "bg-black rounded-lg text-xl font-source text-white min-w-max";
 
   const join = async () => {
     const { signerAddress } = await joinDao(dao.address, getProvider());

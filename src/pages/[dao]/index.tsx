@@ -28,7 +28,7 @@ const DaoPage: FC<Props> = ({ dao, proposals, topMembers }) => {
           <div className="col-span-1 h-[300px] flex flex-col gap-4 items-center text-3xl border border-white py-2">
             <span className="text-3xl">Top members</span>
             {topMembers.map((user, i) => (
-              <div className="grid grid-cols-3 gap-4  mx-4">
+              <div key={user.id} className="grid grid-cols-3 gap-4  mx-4">
                 <div>
                   #{i + " "}
                   <Image
@@ -61,7 +61,8 @@ const DaoPage: FC<Props> = ({ dao, proposals, topMembers }) => {
                 <div>Quorum</div>
               </div>
             </div>
-            {proposals.map((p, i) => (
+            {proposals.map((p) => (
+            <div key={p.id}>
               <Link passHref href={getProposalUrl(dao.slug, p.id)}>
                 <a>
                   <div className="grid grid-cols-3 gap-4 w-full border border-white py-2">
@@ -84,6 +85,7 @@ const DaoPage: FC<Props> = ({ dao, proposals, topMembers }) => {
                   </div>
                 </a>
               </Link>
+              </div>
             ))}
           </div>
         </div>

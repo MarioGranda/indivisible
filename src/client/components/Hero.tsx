@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-const Hero: FC<Props> = ({ className, dao }) => {
+const Hero: FC<Props> = ({ dao }) => {
   return (
     <section className="h-[600px]">
       <FixedContainer className="">

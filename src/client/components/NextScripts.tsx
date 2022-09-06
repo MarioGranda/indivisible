@@ -5,6 +5,7 @@ const NextScripts: FC = () => {
   return (
     <>
       <Script
+        id="source-font"
         dangerouslySetInnerHTML={{
           __html: `
             WebFontConfig = {

@@ -1,7 +1,6 @@
 import getProvider from "@/shared/utils/getProvider";
 import { parseEthAddress } from "@/shared/utils/parse";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import FixedContainer from "../layouts/FixedContainer";
 

@@ -16,9 +16,8 @@ import {
 import { useNotification } from "@/client/redux/selectors";
 import Notification from "@/client/components/Notification";
 
-interface Props {}
 
-export const CreateItem: FC<Props> = ({}) => {
+export const CreateItem: FC = () => {
   const [daoImage, setDaoImage] = useState<ContentFileType | null>(null);
   const [tokenImage, setTokenImage] = useState<ContentFileType | null>(null);
   const [isLoading, setIsLoading] = useState(false);

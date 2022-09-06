@@ -1,10 +1,10 @@
-import { FC, LegacyRef } from "react";
+import { FC, LegacyRef, ReactNode } from "react";
 
 interface Props {
   className?: string;
-  children: any;
   id?: string;
   ref?: LegacyRef<HTMLDivElement>;
+  children: ReactNode;
 }
 
 const FixedContainer: FC<Props> = ({ className, children, id, ref }) => {

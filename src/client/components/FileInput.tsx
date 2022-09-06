@@ -1,6 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from "react";
-import Label from "./Label";
-import { BiUpArrow, BiDownArrow } from "react-icons/bi";
+import React, { ChangeEvent, FC, useRef } from "react";
 import Image from "next/image";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { ContentFileType } from "@/shared/models";

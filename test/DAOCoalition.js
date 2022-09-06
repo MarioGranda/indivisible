@@ -17,7 +17,8 @@ describe("DAO coalition tests", async function () {
     dao2Address,
     daoCreator,
     token1Address,
-    coalitionDao;
+    coalitionDao,
+    deployer;
   let merkleTree, merkleRoot;
   let DAO, Token;
   const name = "HOAs";
@@ -55,7 +56,7 @@ describe("DAO coalition tests", async function () {
       );
     let result = await tx.wait();
     let event = result.events[result.events.length - 1];
-    coalitionDaoAddress = event.args.dao;
+    const coalitionDaoAddress = event.args.dao;
     coalitionDao = DAO.attach(coalitionDaoAddress);
 
     //create dao1
@@ -190,7 +191,7 @@ describe("DAO coalition tests", async function () {
     const token3Address = await dao3.connect(signers[1]).token();
     await dao3.connect(signers[3]).join({ from: user });
 
-    leaves = [dao1Address, dao2Address, dao3Address];
+    const leaves = [dao1Address, dao2Address, dao3Address];
     //get MerkleRoot
     merkleTree = generateMerkleTree(leaves);
     merkleRoot = generateMerkleRoot(merkleTree);
@@ -240,7 +241,7 @@ describe("DAO coalition tests", async function () {
     const token3Address = await dao3.connect(signers[1]).token();
     await dao3.connect(signers[3]).join({ from: user });
 
-    leaves = [dao1Address, dao2Address, dao3Address];
+    const leaves = [dao1Address, dao2Address, dao3Address];
     //get MerkleRoot
     merkleTree = generateMerkleTree(leaves);
     merkleRoot = generateMerkleRoot(merkleTree);

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import FixedContainer from "../layouts/FixedContainer";
 import { Comment } from "@/shared/models";
 
 interface Props {
@@ -8,8 +7,7 @@ interface Props {
   className?: string;
 }
 
-const Post: FC<Props> = ({ comment, className }) => {
-  const _class = classNames("font-source text-white", className);
+const Post: FC<Props> = ({ className }) => {
 
   return <div className="bg-gray rounded-xl">Hola</div>;
 };

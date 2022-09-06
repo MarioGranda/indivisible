@@ -7,7 +7,7 @@ interface Props {
   hasFocus?: boolean;
 }
 
-const Label: FC<Props> = ({ id, children, className, hasFocus = false }) => (
+const Label: FC<Props> = ({ id, children }) => (
   <label
     htmlFor={id}
     className="text-13 text-white font-source leading-normal font-medium"
