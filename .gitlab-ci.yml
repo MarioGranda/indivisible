@@ -1,7 +1,12 @@
 image: node:16.13
 
+stages:
+  - test
+  - pre-deploy
+  - deploy
+
 Lint / Code format:
-  stage: deploy
+  stage: test
   script:
     - npm i
     - npx hardhat compile
