@@ -1,6 +1,6 @@
 import FixedContainer from "@/client/layouts/FixedContainer";
 import Image from "next/image";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Footer from "@/client/components/Footer";
 import {
   LocomotiveScrollProvider,
@@ -12,8 +12,23 @@ import { FaHandshake } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import { BENEFITS } from "@/client/utils/benefits";
 import { useRouter } from "next/router";
+import {
+  fetchStrapiBullets,
+  fetchStrapiHomePage,
+} from "@/backend/services/strapi";
 
-const Home: FC<[]> = () => {
+interface Section {
+  title: string;
+  text: string;
+  subtitle?: string;
+  sectionTitle?: string;
+}
+interface Props {
+  paragraphs: Section[];
+  bullets: Section[];
+}
+
+const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const borderIn = useRef<HTMLDivElement>(null);
   const borderOut = useRef<HTMLDivElement>(null);
   const text = useRef<HTMLParagraphElement>(null);
@@ -72,12 +87,10 @@ const Home: FC<[]> = () => {
         <div data-scroll-section className="">
           <FixedContainer className="flex flex-col gap-52">
             <p className="w-[624px] text-white font-source text-5xl">
-              No-code tools for building democratic communities.
+              {paragraphs[0].title}
             </p>
             <p className="w-[624px] place-self-end text-white font-source text-xl">
-              To engage and empower everyday people in the decisions that impact
-              them the most, to promote sustainable resource management,
-              collective ownership, and community vitality.
+              {paragraphs[0].text}
             </p>
           </FixedContainer>
         </div>
@@ -98,16 +111,9 @@ const Home: FC<[]> = () => {
         <div data-scroll-section className="">
           <FixedContainer className="flex flex-col gap-52 h-[1500px]">
             <div className="w-[624px] text-white font-source">
-              <h2 className="text-5xl py-4">Why?</h2>
-              <h3 className="text-3xl py-4">
-                Communities are happier & healthier, & neighbors are stronger
-                when they’re united.
-              </h3>
-              Giving people a platform to build a shared vision for a common
-              future and solutions to achieve small things and potentially
-              overcome failures in today’s representative models that
-              efficiently barter power and resources, and produce inefficiency,
-              apathy, inequality and injustice.
+              <h2 className="text-5xl py-4">{paragraphs[2].title}</h2>
+              <h3 className="text-3xl py-4">{paragraphs[2].subtitle}</h3>
+              {paragraphs[2].text}
             </div>
             <div className="w-[624px] text-white font-source place-self-end relative">
               <div
@@ -125,12 +131,8 @@ const Home: FC<[]> = () => {
                 className="absolute left-0 top-0 w-[700px] h-[320px] border border-white"
               ></div>
               <div className="py-10 px-16">
-                <h2 className="text-5xl py-4">Who?</h2>
-                Like a public space, Indivisible is for everyone, which is why
-                we are producing the no-code tools and templatized solutions for
-                building more democratic communities and entrepreneurial
-                collectives to build the change we need for our society to
-                thrive. If you’re impacted, you can participate.
+                <h2 className="text-5xl py-4">{paragraphs[1].title}</h2>
+                {paragraphs[1].text}
               </div>
             </div>
           </FixedContainer>
@@ -144,39 +146,24 @@ const Home: FC<[]> = () => {
               data-scroll-repeat
               className="pt-28 w-[624px] text-4xl"
             >
-              Potential use cases
+              {bullets[0].sectionTitle}
             </p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
                 <MdFamilyRestroom size={40} />
-                Family & friends
+                {bullets[0].title}
               </h3>
-              <p className="text-xl">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis soluta, dolores expedita possimus magni molestias
-                cumque repellat rem suscipit commodi totam, eius provident
-                maiores blanditiis, explicabo illo quo delectus! Libero.
-              </p>
+              <p className="text-xl">{bullets[0].text}</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
                 <AiFillHome size={40} />
-                Tenants/interest groups
+                {bullets[1].title}
               </h3>
-              <p className="text-xl">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis soluta, dolores expedita possimus magni molestias
-                cumque repellat rem suscipit commodi totam, eius provident
-                maiores blanditiis, explicabo illo quo delectus! Libero.
-              </p>
+              <p className="text-xl">{bullets[1].text}</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
                 <FaHandshake size={40} />
-                Coalitions
+                {bullets[2].title}
               </h3>
-              <p className="text-xl">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis soluta, dolores expedita possimus magni molestias
-                cumque repellat rem suscipit commodi totam, eius provident
-                maiores blanditiis, explicabo illo quo delectus! Libero.
-              </p>
+              <p className="text-xl">{bullets[2].text}</p>
               <h3 className="text-3xl my-5"></h3>
             </div>
           </FixedContainer>
@@ -194,43 +181,29 @@ const Home: FC<[]> = () => {
               data-scroll-repeat
               className="pt-28 w-[624px] text-4xl"
             >
-              Build a healthy community
+              {bullets[3].sectionTitle}
             </p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                Participatory economics
+                {bullets[3].title}
               </h3>
-              <p className="text-xl">
-                Equity, solidarity, diversity, workers&apos; self-management,
-                efficiency (defined as accomplishing goals without wasting
-                valued assets) and sustainability..
-              </p>
+              <p className="text-xl">{bullets[3].text}</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                Participatory politics
+                {bullets[4].title}
               </h3>
-              <p className="text-xl">
-                Freedom, self-management, justice, solidarity, and tolerance.
-              </p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">Governance</h3>
-              <p className="text-xl">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis soluta, dolores expedita possimus magni molestias
-                cumque repellat rem suscipit commodi totam, eius provident
-                maiores blanditiis, explicabo illo quo delectus! Libero.
-              </p>
+              <p className="text-xl">{bullets[4].text}</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                Blockchain technology
+                {bullets[5].title}
               </h3>
-              <p className="text-xl">
-                Censhorship-resistant, transparency, auditability and prevention
-                manipulation.
-              </p>
+              <p className="text-xl">{bullets[5].text}</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                Rewarding participation
+                {bullets[6].title}
               </h3>
-              <p className="text-xl">
-                Get rewards by helping your community become a better place.
-              </p>
+              <p className="text-xl">{bullets[6].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[7].title}
+              </h3>
+              <p className="text-xl">{bullets[7].text}</p>
             </div>
           </FixedContainer>
         </div>
@@ -253,6 +226,30 @@ const Home: FC<[]> = () => {
       </div>
     </LocomotiveScrollProvider>
   );
+};
+
+export const getServerSideProps = async () => {
+  const paragraphs = await fetchStrapiHomePage();
+  const bullets = await fetchStrapiBullets();
+
+  return {
+    props: {
+      paragraphs: paragraphs
+        .filter((p) => p.attributes.title !== null)
+        .map((p) => ({
+          title: p.attributes.title,
+          text: p.attributes.paragraph,
+          subtitle: p.attributes.subtitle ?? "",
+        })),
+      bullets: bullets
+        .filter((p) => p.attributes.title !== null)
+        .map((p) => ({
+          title: p.attributes.title,
+          text: p.attributes.paragraph,
+          sectionTitle: p.attributes.sectionTitle,
+        })),
+    },
+  };
 };
 
 export default Home;
