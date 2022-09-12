@@ -4,10 +4,7 @@ import Post from "@/client/components/Post";
 import TextArea from "@/client/components/TextArea";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import { Comment } from "@/shared/models";
-import React, {
-  FC,
-  useState,
-} from "react";
+import React, { FC, useState } from "react";
 import { MdOutlineAdd } from "react-icons/md";
 
 interface Props {

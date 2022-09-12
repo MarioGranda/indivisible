@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Post: FC<Props> = ({ className }) => {
-
   return <div className="bg-gray rounded-xl">Hola</div>;
 };
 

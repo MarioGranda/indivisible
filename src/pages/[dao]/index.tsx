@@ -62,29 +62,29 @@ const DaoPage: FC<Props> = ({ dao, proposals, topMembers }) => {
               </div>
             </div>
             {proposals.map((p) => (
-            <div key={p.id}>
-              <Link passHref href={getProposalUrl(dao.slug, p.id)}>
-                <a>
-                  <div className="grid grid-cols-3 gap-4 w-full border border-white py-2">
-                    <div className="flex items-center justify-start px-6">
-                      {p.name}
-                    </div>
-                    <div className="flex items-center gap-16 justify-center">
-                      <div className="">
-                        {new Date(p.consensusDeadline).toDateString()}
+              <div key={p.id}>
+                <Link passHref href={getProposalUrl(dao.slug, p.id)}>
+                  <a>
+                    <div className="grid grid-cols-3 gap-4 w-full border border-white py-2">
+                      <div className="flex items-center justify-start px-6">
+                        {p.name}
                       </div>
-                      <div className="">
-                        {new Date(p.votingDeadline).toDateString()}
+                      <div className="flex items-center gap-16 justify-center">
+                        <div className="">
+                          {new Date(p.consensusDeadline).toDateString()}
+                        </div>
+                        <div className="">
+                          {new Date(p.votingDeadline).toDateString()}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-14 justify-end px-8">
+                        <div>{p.yea}</div>
+                        <div>{p.nay}</div>
+                        <div>{p.minQuorum}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-14 justify-end px-8">
-                      <div>{p.yea}</div>
-                      <div>{p.nay}</div>
-                      <div>{p.minQuorum}</div>
-                    </div>
-                  </div>
-                </a>
-              </Link>
+                  </a>
+                </Link>
               </div>
             ))}
           </div>

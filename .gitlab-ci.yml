@@ -17,36 +17,36 @@ Lint / Code format:
     - npm run solhint
   coverage: /All files\s*\|\s*([\d\.]+)/
 
-#   Migrate DEV database:
-#   stage: pre-deploy
-#   except:
-#     - main
-#   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-#   script:
-#     - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-#     - apt-get install -y nodejs
-#     - npm i
-#     - SECRET_ID=$MYSQL_DEV_SECRET_KEY ./scripts/rds-migrate up
+  Migrate DEV database:
+  stage: pre-deploy
+  except:
+    - main
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+    - apt-get install -y nodejs
+    - npm i
+    - npm run db-migrate:down
 
-# Rollback DEV database:
-#   stage: pre-deploy
-#   when: manual
-#   except:
-#     - main
-#   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-#   script:
-#     - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-#     - apt-get install -y nodejs
-#     - npm i
-#     - SECRET_ID=$MYSQL_DEV_SECRET_KEY ./scripts/rds-migrate down
+Rollback DEV database:
+  stage: pre-deploy
+  when: manual
+  except:
+    - main
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+    - apt-get install -y nodejs
+    - npm i
+    - npm run db-migrate:up
 
-  # Deploy to production:
-  # stage: deploy
-  # image: node:16-alpine
-  # when: manual
-  # only:
-  #   - main
-  # script:
-  #   - apk add git
-  #   - npm i --location=global vercel
-  #   - VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --prod
+# Deploy to production:
+# stage: deploy
+# image: node:16-alpine
+# when: manual
+# only:
+#   - main
+# script:
+#   - apk add git
+#   - npm i --location=global vercel
+#   - VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --prod
