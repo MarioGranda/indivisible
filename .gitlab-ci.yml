@@ -24,7 +24,7 @@ Migrate DEV database:
     - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
     - apt-get install -y nodejs
     - npm i
-    - npm run db-migrate:down
+    - npm run db-migrate:up
 
 Rollback DEV database:
   stage: pre-deploy
@@ -34,7 +34,7 @@ Rollback DEV database:
     - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
     - apt-get install -y nodejs
     - npm i
-    - npm run db-migrate:up
+    - npm run db-migrate:down
 # Deploy to production:
 # stage: deploy
 # image: node:16-alpine
