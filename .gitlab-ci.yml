@@ -39,7 +39,6 @@ Rollback DEV database:
     - apt-get install -y nodejs
     - npm i
     - npm run db-migrate:up
-
 # Deploy to production:
 # stage: deploy
 # image: node:16-alpine
