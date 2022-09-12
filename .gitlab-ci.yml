@@ -5,6 +5,13 @@ stages:
   - pre-deploy
   - deploy
 
+variables: 
+  DB_HOST: indivisible.cygb7ryxi2uy.eu-west-1.rds.amazonaws.com
+  DB_USER: admin
+  DB_PASSWORD: password
+  DB_DATABASE: indivisible
+  DB_PORT: 3306
+
 Lint / Code format:
   stage: test
   script:
