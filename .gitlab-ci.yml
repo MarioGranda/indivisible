@@ -17,7 +17,7 @@ Lint / Code format:
     - npm run solhint
   coverage: /All files\s*\|\s*([\d\.]+)/
 
-  Migrate DEV database:
+Migrate DEV database:
   stage: pre-deploy
   except:
     - main
