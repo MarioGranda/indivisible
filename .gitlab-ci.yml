@@ -5,7 +5,7 @@ stages:
   - pre-deploy
   - deploy
 
-variables: 
+variables:
   DB_HOST: indivisible.cygb7ryxi2uy.eu-west-1.rds.amazonaws.com
   DB_USER: admin
   DB_PASSWORD: password
