@@ -30,7 +30,7 @@ Migrate DEV database:
   script:
     - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
     - apt-get install -y nodejs
-    - apt-get install git
+    - apt-get install -y git
     - npm i
     - npm run db-migrate:up
 
