@@ -34,8 +34,10 @@ const deployContracts = async (multisig) => {
 
 const generateMerkleTree = (leaves) => {
   const hashedLeaves = leaves.map((x) => keccak256(x));
+  console.log(hashedLeaves);
   const tree = new MerkleTree(hashedLeaves, keccak256, { sort: true });
-
+  console.log(tree);
+  console.log(tree.toString());
   return tree;
 };
 
