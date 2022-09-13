@@ -30,17 +30,6 @@ export const openPendingTransactionNotification = (image: string) => {
   });
 };
 
-export const openWaitForCountDownNotification = () => {
-  return openNotification({
-    title: "Purchase",
-    description:
-      "Hey! Once the countdown is finished you'll be able to listen to the song and also buy the NFT.\n \n" +
-      "In the meantime you can get your Metamask Wallet ready and add some ETH(NFT price + gas fees) to your account.",
-    btnText: "close",
-    closeOnBtnClick: true,
-  });
-};
-
 export const openTransactionCompleteNotification = (
   result: any,
   image: string
@@ -48,7 +37,7 @@ export const openTransactionCompleteNotification = (
   const { status, transactionHash } = result;
   return openNotification({
     title:
-      status === 1 ? "DAO createad successfully" : "Oops! Something went wrong",
+      status === 1 ? "DAO createad successfully" : "Oops Something went wrong",
     status: status === 1 ? "SUCCESS" : "FAILED",
     description: "",
     transactionHash: transactionHash,
@@ -71,6 +60,7 @@ export const openUnsufficientFundsNotification = () => {
 export const openTransactionFailedNotification = (error: unknown) => {
   return openNotification({
     title: "Oops something went wrong",
+    status: "FAILED",
     description: isMetamaskError(error)
       ? getRevertedTransactionMessage(error)
       : "Please try again ",

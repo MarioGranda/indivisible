@@ -1,8 +1,8 @@
-import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, FC, useCallback, useState } from "react";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import Input from "@/client/components/Input";
 import TextArea from "@/client/components/TextArea";
-import { ContentFileType } from "@/shared/models";
+import { ContentFileType, Dao } from "@/shared/models";
 import FileInput from "@/client/components/FileInput";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -12,22 +12,27 @@ import { CreateDaoInput } from "@/shared/validators/createDao";
 import {
   openPendingTransactionNotification,
   openTransactionCompleteNotification,
+  openTransactionFailedNotification,
 } from "@/client/redux/actions/notification";
-import { useNotification } from "@/client/redux/selectors";
-import Notification from "@/client/components/Notification";
+import { useRouter } from "next/router";
+import Toggle from "@/client/components/Toggle";
+import Select from "@/client/components/Select";
+import { findAllDaos } from "@/backend/repositories/dao";
+import { MdAdd, MdClose } from "react-icons/md";
 
-export const CreateItem: FC = () => {
+interface Props {
+  daos: Dao[];
+}
+
+export const CreateDao: FC<Props> = ({ daos }) => {
   const [daoImage, setDaoImage] = useState<ContentFileType | null>(null);
   const [tokenImage, setTokenImage] = useState<ContentFileType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
-  const notification = useNotification();
+  const [selectedDao, setSelectedDao] = useState(null);
+  const [childrenDaos, setChildrenDaos] = useState<Dao[]>([]);
 
-  useEffect(() => {
-    if (daoImage?.image?.preview) {
-      dispatch(openPendingTransactionNotification(daoImage.image.preview));
-    }
-  }, [daoImage]);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const [formInput, setFormInput] = useState({
     name: "",
@@ -40,7 +45,30 @@ export const CreateItem: FC = () => {
     mintAmount: undefined,
     daoImage: "",
     tokenImage: "",
+    isCoalitionDao: false,
   });
+
+  const addChildrenDao = () => {
+    if (childrenDaos.find((d) => d.id === Number(selectedDao))) {
+      return;
+    }
+    setChildrenDaos([
+      ...childrenDaos,
+      daos.find((d) => d.id === Number(selectedDao)),
+    ]);
+  };
+
+  const removeChildrenDao = (daoId: number) => {
+    setChildrenDaos(childrenDaos.filter((d) => d.id !== daoId));
+  };
+
+  const onToggleChange = (enabled: boolean) => {
+    if (!enabled) {
+      setChildrenDaos([]);
+      setSelectedDao(null);
+    }
+    setFormInput((prev) => ({ ...prev, isCoalitionDao: enabled }));
+  };
 
   const validationResult = CreateDaoInput.safeParse(formInput);
 
@@ -52,7 +80,6 @@ export const CreateItem: FC = () => {
           const imageFile = Array.from(files).filter((file) =>
             file.type.startsWith("image")
           )[0];
-          console.log(event);
           if (event.target.name === "DaoImageInput") {
             setDaoImage({
               image: {
@@ -78,11 +105,10 @@ export const CreateItem: FC = () => {
           }
         }
       } catch (error) {
-        console.log(error);
         // await dispatch(
         //   openNotification({
         //     title: "Error",
-        //     description: "Make sure you select an image and audio file.",
+        //     description: "Make sure you select an image file.",
         //   })
         // );
       }
@@ -98,7 +124,6 @@ export const CreateItem: FC = () => {
       ...prev,
       [name]: parseInt(value),
     }));
-    console.log(formInput);
   };
 
   const handleFormInputString = (
@@ -113,15 +138,14 @@ export const CreateItem: FC = () => {
 
   const createDao = async () => {
     try {
-      // await dispatch(
-      //   openNotification({
-      //     title: "Uploading NFT media",
-      //     description: "Uploading image and audio to S3",
-      //     status: "PENDING",
-      //   })
-      // );
-      console.log(formInput);
       if (daoImage && tokenImage) {
+        await dispatch(
+          openPendingTransactionNotification(daoImage.image.preview)
+        );
+
+        const { daoAddress, transactionHash, status, daoCreatorAddress } =
+          await deployDao(formInput, getProvider());
+
         const signedUrlInput = {
           daoName: formInput.name,
           tokenName: formInput.tokenName,
@@ -159,20 +183,6 @@ export const CreateItem: FC = () => {
 
         await Promise.all([daoImagePromise, tokenImagePromise]);
 
-        // await dispatch(
-        //   openNotification({
-        //     title: "Creating FullTrack",
-        //     description: getTransactionMessage("PENDING"),
-        //     status: "PENDING",
-        //   })
-        // );
-        await dispatch(
-          openPendingTransactionNotification(daoImage.image.preview)
-        );
-
-        const { daoAddress, transactionHash, status, daoCreatorAddress } =
-          await deployDao(formInput, getProvider());
-
         await axios.post(
           "/api/create-dao",
           {
@@ -190,40 +200,14 @@ export const CreateItem: FC = () => {
           }
         );
         const result = { status, transactionHash };
+
         await dispatch(
           openTransactionCompleteNotification(result, daoImage.image.preview)
         );
-        //if (status === 1) {
-        //   await dispatch(
-        //     openNotification({
-        //       title: "FullTrack created succesfully",
-        //       description: getTransactionMessage("SUCCESS"),
-        //       status: "SUCCESS",
-        //       transactionHash: transactionHash,
-        //       closeOnRouteChange: false,
-        //     })
-        //   );
-        // } else {
-        //   await dispatch(
-        //     openNotification({
-        //       title: "FullTrack creation failed",
-        //       description: getTransactionMessage("FAILED"),
-        //       status: "FAILED",
-        //       closeOnRouteChange: true,
-        //     })
-        //   );
-        // }
-        // router.push("/");
+        router.push("/explore");
       }
     } catch (error) {
-      // await dispatch(
-      //   openNotification({
-      //     title: "Error",
-      //     description: getErrorMessage(error),
-      //     status: "FAILED",
-      //   })
-      // );
-      console.log(error);
+      await dispatch(openTransactionFailedNotification(error));
     } finally {
       setIsLoading(false);
     }
@@ -302,7 +286,7 @@ export const CreateItem: FC = () => {
             type="number"
             label="Consensus Period"
             onChange={handleFormInputInt}
-            placeholder="Min consensus period"
+            placeholder="Days"
             step={1}
             min={0}
           />
@@ -313,7 +297,7 @@ export const CreateItem: FC = () => {
             type="number"
             label="Voting Period"
             onChange={handleFormInputInt}
-            placeholder="Min voting period"
+            placeholder="Days"
             step={1}
             min={0}
           />
@@ -324,22 +308,73 @@ export const CreateItem: FC = () => {
             type="number"
             label="Quorum"
             onChange={handleFormInputInt}
-            placeholder="Min quorum"
+            placeholder="Basis Points"
             step={1}
             min={0}
           />
         </div>
+        <h2 className="text-3xl font-source font-bold">Coalition DAO</h2>
+        <div className="flex gap-10 justify-items-center h-14">
+          <Toggle onChange={(enabled) => onToggleChange(enabled)} />
+          {formInput.isCoalitionDao && (
+            <Select
+              name="childrenDaos"
+              items={daos.map(({ id, name }) => {
+                return { name, code: id.toString() };
+              })}
+              onChange={(e) => {
+                setSelectedDao(e.target.value);
+              }}
+              placeholder="Select a DAO"
+              required
+              className=""
+            />
+          )}{" "}
+          {selectedDao && (
+            <button
+              onClick={addChildrenDao}
+              className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
+            >
+              <MdAdd size={30} />
+              Add
+            </button>
+          )}
+        </div>
+        {childrenDaos.length > 0 && (
+          <div className="flex gap-10 justify-items-center h-14">
+            {childrenDaos.map((dao) => (
+              <div key={dao.id}>
+                <button className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4">
+                  {dao.name}
+                  <MdClose
+                    onClick={() => removeChildrenDao(dao.id)}
+                    size={30}
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
         <button
           onClick={createDao}
           disabled={!daoImage || !tokenImage || isLoading}
-          className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
+          className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
         >
           Create DAO
         </button>
       </div>
-      {notification && <Notification></Notification>}
     </FixedContainer>
   );
 };
 
-export default CreateItem;
+export const getServerSideProps = async () => {
+  const daos = await findAllDaos();
+
+  return {
+    props: {
+      daos: daos,
+    },
+  };
+};
+
+export default CreateDao;

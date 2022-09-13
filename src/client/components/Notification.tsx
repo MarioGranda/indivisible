@@ -91,10 +91,10 @@ const Notification: FC = () => {
               </h2>
             </div>
             <div className="flex flex-col border-1 border-t border-gray-350 items-center w-full gap-5 pt-12 mb-6">
-              {notification.status !== "FAILED" && (
+              {notification.status === "PENDING" && (
                 <CgSpinner className="animate-spin h-10 w-10 m-2"></CgSpinner>
               )}
-              <p className="text-xs font-source break-words leading-normal text-center max-w-[199px] font-medium whitespace-pre-wrap">
+              <p className="text-base font-source break-words leading-normal text-center max-w-[199px] font-medium whitespace-pre-wrap">
                 {notification.description}
               </p>
               {notification.transactionHash &&
@@ -104,9 +104,11 @@ const Notification: FC = () => {
                       passHref
                       href={getPolygonscanUrl(notification.transactionHash)}
                     >
-                      <a target="_blank">
-                        Tx hash:{" "}
-                        {notification.transactionHash.substring(0, 6) + "..."}
+                      <a className="flex gap-2" target="_blank">
+                        Tx hash:
+                        <p className="underline">
+                          {notification.transactionHash.substring(0, 6) + "..."}
+                        </p>
                       </a>
                     </Link>
                   </div>

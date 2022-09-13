@@ -41,7 +41,7 @@ const Hero: FC<Props> = ({ dao }) => {
                 </span>{" "}
                 and contribute to Digital Democracy.
               </h2>
-              <button className="my-8 ml-[202px] flex  mx-auto items-center h-10 font-bold text-white bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4">
+              <button className="my-8 ml-[202px] flex  mx-auto items-center h-10 font-bold text-white bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4">
                 <span>Discover DAOs &nbsp;</span>
                 <ImArrowRight2></ImArrowRight2>
               </button>

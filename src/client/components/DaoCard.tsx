@@ -31,12 +31,11 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
       <Link passHref href={getDaoUrl(dao.slug)}>
         <a>
           <article className="bg-black cursor-pointer rounded-xl h-[320px] p-4">
-            <div className="flex justify-center h-[200px] border border-white rounded-xl">
+            <div className="relative flex justify-center h-[200px] rounded-xl">
               <Image
                 src={dao.image}
                 alt={`${dao.name} image`}
-                width={200}
-                height={200}
+                layout="fill"
                 //blurDataURL={DEFAULT_IMAGE_PLACEHOLDER}
                 //placeholder="blur"
                 className="rounded object-cover "
@@ -53,7 +52,7 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
               <div className="flex justify-between">
                 <button
                   onClick={join}
-                  className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg"
+                  className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg"
                 >
                   Join +
                 </button>

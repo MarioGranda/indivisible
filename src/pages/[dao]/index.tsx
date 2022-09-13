@@ -21,7 +21,7 @@ const DaoPage: FC<Props> = ({ dao, proposals, topMembers }) => {
         <div className="h-[400px] w-full grid grid-cols-3 gap-4 items-center">
           <div className="col-span-2 flex flex-col items-center justify-center">
             <span className="text-7xl">{dao.name}</span>
-            <button className="mt-8 text-2xl flex items-center h-15 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green enabled:focus:border-green p-4 shadow-lg">
+            <button className="mt-8 text-2xl flex items-center h-15 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg">
               Create proposal
             </button>
           </div>

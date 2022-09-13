@@ -220,7 +220,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             </Marquee>
           </FixedContainer>
         </div>
-        <div data-scroll-section>
+        <div data-scroll-section className="h-[250px]">
           <Footer />
         </div>
       </div>
