@@ -61,6 +61,7 @@ module.exports = {
         "zoom-in": "zoomIn 500ms ease-in-out alternate",
         disappear: "disappear 1000ms ease-in-out forwards",
         appear: "appear 1000ms ease-in-out forwards",
+        "appear-slowly": "appear 2000ms ease-in-out forwards",
       },
     },
   },

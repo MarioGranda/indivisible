@@ -33,6 +33,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const borderOut = useRef<HTMLDivElement>(null);
   const text = useRef<HTMLParagraphElement>(null);
   const containerRef = useRef(null);
+  const coalitionImage = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   let isDown = false;
@@ -40,6 +41,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const handleZoom = (scroll) => {
     scroll.on("scroll", (args) => {
       const scrollY = args.scroll.y;
+      console.log(args.currentElements.el6 || args.currentElements.el8);
       if (scrollY <= 100 && isDown) {
         isDown = false;
         text.current.classList.remove("animate-disappear");
@@ -48,6 +50,8 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         isDown = true;
         text.current.classList.remove("animate-appear");
         text.current.classList.add("animate-disappear");
+      } else if (args.currentElements.el6 || args.currentElements.el8) {
+        coalitionImage.current.classList.remove("animate-appear-slowly");
       }
     });
   };
@@ -207,7 +211,86 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section className="mt-[200px]">
+        <div
+          data-scroll-section
+          id="nested-council"
+          className="h-[2300px] mt-[1100px]"
+        >
+          <FixedContainer className="flex gap-52 text-white font-source justify-center">
+            <div
+              data-scroll
+              data-scroll-sticky
+              data-scroll-target="#nested-council"
+              className="mt-[300px]"
+            >
+              <Image
+                src="/static/images/nested-council.png"
+                width="500"
+                height="500"
+              />
+            </div>
+            <div className="w-[624px] pt-24">
+              <h3 className="flex text-5xl">{bullets[8].sectionTitle}</h3>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[8].title}
+              </h3>
+              <p className="text-xl">{bullets[8].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[9].title}
+              </h3>
+              <p className="text-xl">{bullets[9].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[10].title}
+              </h3>
+              <p className="text-xl">{bullets[10].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[11].title}
+              </h3>
+              <p className="text-xl">{bullets[11].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[12].title}
+              </h3>
+              <p className="text-xl">{bullets[12].text}</p>
+              <h3 className="flex text-5xl pt-10">{bullets[8].sectionTitle}</h3>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[8].title}
+              </h3>
+              <p className="text-xl">{bullets[8].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[9].title}
+              </h3>
+              <p className="text-xl">{bullets[9].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[10].title}
+              </h3>
+              <p className="text-xl">{bullets[10].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[11].title}
+              </h3>
+              <p className="text-xl">{bullets[11].text}</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                {bullets[12].title}
+              </h3>
+              <p className="text-xl">{bullets[12].text}</p>
+            </div>
+          </FixedContainer>
+        </div>
+        <div data-scroll-section>
+          <FixedContainer className="h-screen flex flex-col justify-center items-center gap-28 text-white font-source">
+            <div
+              ref={coalitionImage}
+              data-scroll
+              data-scroll-class="animate-appear-slowly"
+            >
+              <Image
+                src="/static/images/nested-councils.png"
+                width="900"
+                height="400"
+              />
+            </div>
+          </FixedContainer>
+        </div>
+        <div data-scroll-section className="mt-[500px]">
           <FixedContainer className="h-screen flex flex-col justify-center items-center gap-28 text-white font-source">
             <button
               className="border-4 border-white p-4 text-3xl w-[300px]"
