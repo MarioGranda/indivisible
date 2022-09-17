@@ -1,12 +1,14 @@
 import { ethers } from "ethers";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import DaoCreator from "../../../artifacts/contracts/DAOCreator.sol/DAOCreator.json";
+import Dao from "../../../artifacts/contracts/DAO.sol/DAO.json";
 import { DaoCreatedEvent, getEvent } from "@/shared/utils/events";
 import { CreateDaoInput } from "@/shared/validators/createDao";
 
 export async function deployDao(
   input: CreateDaoInput,
-  provider: JsonRpcProvider
+  provider: JsonRpcProvider,
+  root: string | null
 ) {
   await provider.send("eth_requestAccounts", []);
   const signer = provider.getSigner();
@@ -37,11 +39,15 @@ export async function deployDao(
     input.minQuorum
   );
   const result = await transaction.wait();
-  console.log(result);
   const event = getEvent(result, DaoCreatedEvent);
   const daoAddress = ethers.utils.getAddress(
     ethers.utils.hexZeroPad(ethers.utils.hexStripZeros(event.topics[2]), 20)
   );
+  if (root) {
+    const dao = new ethers.Contract(daoAddress, Dao.abi, signer);
+    const updateRoot = await dao.updateMerkleRoot(root);
+    await updateRoot.wait();
+  }
   return {
     daoAddress,
     transactionHash: result.transactionHash,

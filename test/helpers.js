@@ -1,6 +1,5 @@
 const { upgrades } = require("hardhat");
 const { MerkleTree } = require("merkletreejs");
-const SHA256 = require("crypto-js/SHA256");
 const { keccak256 } = ethers.utils;
 
 const deployContracts = async (multisig) => {
@@ -34,10 +33,7 @@ const deployContracts = async (multisig) => {
 
 const generateMerkleTree = (leaves) => {
   const hashedLeaves = leaves.map((x) => keccak256(x));
-  console.log(hashedLeaves);
   const tree = new MerkleTree(hashedLeaves, keccak256, { sort: true });
-  console.log(tree);
-  console.log(tree.toString());
   return tree;
 };
 

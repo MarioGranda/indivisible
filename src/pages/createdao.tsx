@@ -19,6 +19,10 @@ import Toggle from "@/client/components/Toggle";
 import Select from "@/client/components/Select";
 import { findAllDaos } from "@/backend/repositories/dao";
 import { MdAdd, MdClose } from "react-icons/md";
+import {
+  generateMerkleRoot,
+  generateMerkleTree,
+} from "@/shared/utils/merkleTree";
 
 interface Props {
   daos: Dao[];
@@ -143,8 +147,16 @@ export const CreateDao: FC<Props> = ({ daos }) => {
           openPendingTransactionNotification(daoImage.image.preview)
         );
 
+        let root: string;
+        let childrenDaosAddresses: string[];
+        if (childrenDaos.length > 0) {
+          childrenDaosAddresses = childrenDaos.map((d) => d.address);
+          const merkleTree = generateMerkleTree(childrenDaosAddresses);
+          root = generateMerkleRoot(merkleTree);
+        }
+
         const { daoAddress, transactionHash, status, daoCreatorAddress } =
-          await deployDao(formInput, getProvider());
+          await deployDao(formInput, getProvider(), root);
 
         const signedUrlInput = {
           daoName: formInput.name,
@@ -192,6 +204,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
             daoImage: daoResult.path,
             daoAddress,
             transactionHash,
+            merkleTreeLeaves: childrenDaosAddresses,
           },
           {
             headers: {
