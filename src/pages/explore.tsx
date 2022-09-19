@@ -12,7 +12,7 @@ interface Props {
 const Explore: FC<Props> = ({ daos }) => {
   const nftRef = useRef<HTMLDivElement>(null);
 
-  const cards = daos.map((dao, i) => (
+  const cards = daos.map((dao) => (
     <DaoCard className="mt-5" itemId={dao.id} key={dao.id} dao={dao} />
   ));
   return (
