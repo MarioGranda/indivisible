@@ -8,7 +8,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import getProvider from "@/shared/utils/getProvider";
 import { deployDao } from "@/client/utils/createDao";
-import { CreateDaoInput } from "@/shared/validators/createDao";
 import {
   openPendingTransactionNotification,
   openTransactionCompleteNotification,
@@ -73,8 +72,6 @@ export const CreateDao: FC<Props> = ({ daos }) => {
     }
     setFormInput((prev) => ({ ...prev, isCoalitionDao: enabled }));
   };
-
-  const validationResult = CreateDaoInput.safeParse(formInput);
 
   const onFileChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
@@ -147,8 +144,8 @@ export const CreateDao: FC<Props> = ({ daos }) => {
           openPendingTransactionNotification(daoImage.image.preview)
         );
 
-        let root: string;
-        let childrenDaosAddresses: string[];
+        let root: string | null;
+        let childrenDaosAddresses: string[] | null;
         if (childrenDaos.length > 0) {
           childrenDaosAddresses = childrenDaos.map((d) => d.address);
           const merkleTree = generateMerkleTree(childrenDaosAddresses);
@@ -227,156 +224,158 @@ export const CreateDao: FC<Props> = ({ daos }) => {
   };
 
   return (
-    <FixedContainer className="flex flex-wrap-reverse justify-center gap-5 my-20">
-      <div className="flex flex-col gap-5 text-white">
-        <h1 className="text-5xl font-source font-bold">Create New Dao</h1>
-        <FileInput
-          name="DaoImageInput"
-          onFileChange={onFileChange}
-          contentFile={daoImage}
-          className="flex items-center justify-center border-4 border-white w-[350px] h-[255px] p-5"
-        />
-        <Input
-          name="name"
-          value={formInput.name}
-          required
-          label="Name"
-          onChange={handleFormInputString}
-          placeholder="DAO name"
-        />
-        <TextArea
-          name="description"
-          value={formInput.description}
-          required
-          label="Description"
-          onChange={handleFormInputString}
-          placeholder="DAO description"
-        />
-
-        <h2 className="text-3xl font-source font-bold">Token</h2>
-        <FileInput
-          name="TokenImageInput"
-          onFileChange={onFileChange}
-          contentFile={tokenImage}
-          className="flex items-center justify-center border-4 rounded-full border-white w-[100px] h-[100px] p-5"
-          size={35}
-        />
-        <div className="flex gap-7">
+    <div className="explore-bg bg-cover">
+      <FixedContainer className="flex flex-wrap-reverse justify-center gap-5 py-20">
+        <div className="flex flex-col gap-5 text-white">
+          <h1 className="text-5xl font-source font-bold">Create New Dao</h1>
+          <FileInput
+            name="DaoImageInput"
+            onFileChange={onFileChange}
+            contentFile={daoImage}
+            className="flex items-center justify-center border-4 border-white w-[350px] h-[255px] p-5"
+          />
           <Input
-            name="tokenName"
-            value={formInput.tokenName}
+            name="name"
+            value={formInput.name}
             required
             label="Name"
             onChange={handleFormInputString}
-            placeholder="Token name"
+            placeholder="DAO name"
           />
-          <Input
-            name="tokenSymbol"
-            value={formInput.tokenSymbol}
+          <TextArea
+            name="description"
+            value={formInput.description}
             required
-            label="Symbol"
+            label="Description"
             onChange={handleFormInputString}
-            placeholder="Token symbol"
+            placeholder="DAO description"
           />
-          <Input
-            name="mintAmount"
-            value={formInput.mintAmount}
-            required
-            type="number"
-            label="Mint Amount"
-            onChange={handleFormInputInt}
-            placeholder="Mint amount"
-            step={1}
-            min={0}
+
+          <h2 className="text-3xl font-source font-bold">Token</h2>
+          <FileInput
+            name="TokenImageInput"
+            onFileChange={onFileChange}
+            contentFile={tokenImage}
+            className="flex items-center justify-center border-4 rounded-full border-white w-[100px] h-[100px] p-5"
+            size={35}
           />
-        </div>
-        <h2 className="text-3xl font-source font-bold">Minimum standards</h2>
-        <div className="flex gap-7">
-          <Input
-            name="minConsensusPeriod"
-            value={formInput.minConsensusPeriod}
-            required
-            type="number"
-            label="Consensus Period"
-            onChange={handleFormInputInt}
-            placeholder="Days"
-            step={1}
-            min={0}
-          />
-          <Input
-            name="minVotingPeriod"
-            value={formInput.minVotingPeriod}
-            required
-            type="number"
-            label="Voting Period"
-            onChange={handleFormInputInt}
-            placeholder="Days"
-            step={1}
-            min={0}
-          />
-          <Input
-            name="minQuorum"
-            value={formInput.minQuorum}
-            required
-            type="number"
-            label="Quorum"
-            onChange={handleFormInputInt}
-            placeholder="Basis Points"
-            step={1}
-            min={0}
-          />
-        </div>
-        <h2 className="text-3xl font-source font-bold">Coalition DAO</h2>
-        <div className="flex gap-10 justify-items-center h-14">
-          <Toggle onChange={(enabled) => onToggleChange(enabled)} />
-          {formInput.isCoalitionDao && (
-            <Select
-              name="childrenDaos"
-              items={daos.map(({ id, name }) => {
-                return { name, code: id.toString() };
-              })}
-              onChange={(e) => {
-                setSelectedDao(e.target.value);
-              }}
-              placeholder="Select a DAO"
+          <div className="flex gap-7">
+            <Input
+              name="tokenName"
+              value={formInput.tokenName}
               required
-              className=""
+              label="Name"
+              onChange={handleFormInputString}
+              placeholder="Token name"
             />
-          )}{" "}
-          {selectedDao && (
-            <button
-              onClick={addChildrenDao}
-              className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
-            >
-              <MdAdd size={30} />
-              Add
-            </button>
-          )}
-        </div>
-        {childrenDaos.length > 0 && (
-          <div className="flex gap-10 justify-items-center h-14">
-            {childrenDaos.map((dao) => (
-              <div key={dao.id}>
-                <button className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4">
-                  {dao.name}
-                  <MdClose
-                    onClick={() => removeChildrenDao(dao.id)}
-                    size={30}
-                  />
-                </button>
-              </div>
-            ))}
+            <Input
+              name="tokenSymbol"
+              value={formInput.tokenSymbol}
+              required
+              label="Symbol"
+              onChange={handleFormInputString}
+              placeholder="Token symbol"
+            />
+            <Input
+              name="mintAmount"
+              value={formInput.mintAmount}
+              required
+              type="number"
+              label="Mint Amount"
+              onChange={handleFormInputInt}
+              placeholder="Mint amount"
+              step={1}
+              min={0}
+            />
           </div>
-        )}
-        <button
-          onClick={createDao}
-          disabled={!daoImage || !tokenImage || isLoading}
-          className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
-        >
-          Create DAO
-        </button>
-      </div>
-    </FixedContainer>
+          <h2 className="text-3xl font-source font-bold">Minimum standards</h2>
+          <div className="flex gap-7">
+            <Input
+              name="minConsensusPeriod"
+              value={formInput.minConsensusPeriod}
+              required
+              type="number"
+              label="Consensus Period"
+              onChange={handleFormInputInt}
+              placeholder="Days"
+              step={1}
+              min={0}
+            />
+            <Input
+              name="minVotingPeriod"
+              value={formInput.minVotingPeriod}
+              required
+              type="number"
+              label="Voting Period"
+              onChange={handleFormInputInt}
+              placeholder="Days"
+              step={1}
+              min={0}
+            />
+            <Input
+              name="minQuorum"
+              value={formInput.minQuorum}
+              required
+              type="number"
+              label="Quorum"
+              onChange={handleFormInputInt}
+              placeholder="Basis Points"
+              step={1}
+              min={0}
+            />
+          </div>
+          <h2 className="text-3xl font-source font-bold">Coalition DAO</h2>
+          <div className="flex gap-10 justify-items-center h-14">
+            <Toggle onChange={(enabled) => onToggleChange(enabled)} />
+            {formInput.isCoalitionDao && (
+              <Select
+                name="childrenDaos"
+                items={daos.map(({ id, name }) => {
+                  return { name, code: id.toString() };
+                })}
+                onChange={(e) => {
+                  setSelectedDao(e.target.value);
+                }}
+                placeholder="Select a DAO"
+                required
+                className=""
+              />
+            )}{" "}
+            {selectedDao && (
+              <button
+                onClick={addChildrenDao}
+                className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
+              >
+                <MdAdd size={30} />
+                Add
+              </button>
+            )}
+          </div>
+          {childrenDaos.length > 0 && (
+            <div className="flex gap-10 justify-items-center h-14">
+              {childrenDaos.map((dao) => (
+                <div key={dao.id}>
+                  <button className="flex gap-4 items-center bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4">
+                    {dao.name}
+                    <MdClose
+                      onClick={() => removeChildrenDao(dao.id)}
+                      size={30}
+                    />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <button
+            onClick={createDao}
+            disabled={!daoImage || !tokenImage || isLoading}
+            className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
+          >
+            Create DAO
+          </button>
+        </div>
+      </FixedContainer>
+    </div>
   );
 };
 

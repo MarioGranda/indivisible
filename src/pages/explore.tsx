@@ -19,11 +19,14 @@ const Explore: FC<Props> = ({ daos }) => {
   return (
     <div className="explore-bg bg-cover">
       <Hero dao={daos[0]} />
-      <FixedContainer className="mt-5">
+      <FixedContainer className="mt-5 pb-80">
         <h2 className="text-white text-center font-source text-4xl my-5">
           Latest DAOs
         </h2>
-        <div className="grid grid-cols-4 justify-items-center" ref={nftRef}>
+        <div
+          className="grid grid-cols-4 justify-items-center gap-10"
+          ref={nftRef}
+        >
           {cards}
         </div>
       </FixedContainer>

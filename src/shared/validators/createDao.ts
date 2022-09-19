@@ -17,7 +17,8 @@ export const CreateDaoInput = z
     daoImage: z.string().min(1).max(255),
     daoAddress: z.string().regex(ETHEREUM_ADDRESS_REGEX),
     transactionHash: z.string().min(1).max(255),
-    merkleTreeLeaves: z.array(z.string().min(1).max(255)),
+    merkleTreeLeaves: z.string().array().optional(),
+    isCoalitionDao: z.boolean(),
   })
   .strict();
 
