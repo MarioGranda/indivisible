@@ -232,7 +232,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
             name="DaoImageInput"
             onFileChange={onFileChange}
             contentFile={daoImage}
-            className="flex items-center justify-center border-4 border-white w-[350px] h-[255px] p-5"
+            className="flex items-center justify-center border-4 rounded-md border-white w-[350px] h-[255px] p-5"
           />
           <Input
             name="name"
@@ -369,7 +369,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
           <button
             onClick={createDao}
             disabled={!daoImage || !tokenImage || isLoading}
-            className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4"
+            className="font-bold mt-4 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 rounded-md"
           >
             Create DAO
           </button>

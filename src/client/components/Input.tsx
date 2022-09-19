@@ -38,9 +38,9 @@ const Input: FC<Props> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(undefined);
   const defaultInputClassName =
-    "w-full py-2 px-4 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none";
+    "w-full p-2 bg-black text-white font-source leading-normal  focus:outline-none  appearance-none";
   const defaultClassName =
-    "flex flex-row mt-2 border border-white hover:border-green focus:border-green";
+    "flex flex-row mt-2 border rounded-md border-white hover:border-green focus:border-green bg-black";
 
   const mainInputClass =
     "flex-grow flex align-center items-center py-2 px-2 w-[250px]";
@@ -61,27 +61,6 @@ const Input: FC<Props> = ({
             autoComplete="off"
             placeholder={placeholder}
           />
-          {/* {
-            props.step &&
-            <div className="flex flex-col divide-y divide-black">
-                <BiUpArrow
-                  onMouseDown={() => handleOnClick(true)
-                  }
-                  onMouseUp={handleOnUnClick
-                  }
-                  className="cursor-pointer fill-white"
-                  size={18}
-                />
-                <BiDownArrow
-                  onMouseDown={() => handleOnClick(false)
-                  }
-                  onMouseUp={handleOnUnClick
-                  }
-                  className="cursor-pointer fill-white"
-                  size={18}
-                />
-            </div>
-          } */}
         </div>
       </div>
     </div>
