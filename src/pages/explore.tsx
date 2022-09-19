@@ -1,5 +1,4 @@
 import React, { FC, useRef } from "react";
-import { GetServerSideProps } from "next";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import { findAllDaos } from "@/backend/repositories/dao";
 import { Dao } from "@/shared/models";
