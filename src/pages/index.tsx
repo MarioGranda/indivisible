@@ -41,7 +41,8 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const handleZoom = (scroll) => {
     scroll.on("scroll", (args) => {
       const scrollY = args.scroll.y;
-      console.log(args.currentElements.el6 || args.currentElements.el8);
+
+      console.log(args.currentElements);
       if (scrollY <= 100 && isDown) {
         isDown = false;
         text.current.classList.remove("animate-disappear");
@@ -50,8 +51,6 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         isDown = true;
         text.current.classList.remove("animate-appear");
         text.current.classList.add("animate-disappear");
-      } else if (args.currentElements.el6 || args.currentElements.el8) {
-        coalitionImage.current.classList.remove("animate-appear-slowly");
       }
     });
   };
@@ -90,11 +89,18 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         </div>
         <div data-scroll-section className="">
           <FixedContainer className="flex flex-col gap-52">
-            <p className="w-[624px] text-white font-source text-5xl">
-              {paragraphs[0].title}
+            <p className="w-[624px] text-white font-source text-2xl">
+              Indivisible is a<b> global nonprofit federation </b>of independent
+              tenants groups and common interest coalitions, united in
+              bargaining power and member benefits to improve access to and
+              affordability of quality of life services.
             </p>
-            <p className="w-[624px] place-self-end text-white font-source text-xl">
-              {paragraphs[0].text}
+            <p className="w-[624px] place-self-end text-white font-source text-2xl">
+              Our <b>mission</b> is to promote the self-determination and
+              economic and cultural security of impacted tenants around the
+              globe, regardless of age, gender, race, or unique identity through
+              the linking of existing associations and by organizing new groups
+              of tenants.{" "}
             </p>
           </FixedContainer>
         </div>
@@ -113,11 +119,17 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           />
         </div>
         <div data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-52 h-[1500px]">
+          <FixedContainer className="flex flex-col gap-10 h-[1500px]">
             <div className="w-[624px] text-white font-source">
-              <h2 className="text-5xl py-4">{paragraphs[2].title}</h2>
-              <h3 className="text-3xl py-4">{paragraphs[2].subtitle}</h3>
-              {paragraphs[2].text}
+              <h2 className="text-5xl py-4">Org Creation</h2>
+              <h3 className="text-3xl py-4">
+                There are over 50 well established tenants associations in New
+                York alone.
+              </h3>
+              In Berlin almost 10% of the city population belong to one of the
+              two main tenants associations and the trend is common across the
+              world. With raising rent and living costs and changing city
+              politics, now is an opportune time to organize and unite.
             </div>
             <div className="w-[624px] text-white font-source place-self-end relative">
               <div
@@ -135,152 +147,35 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 className="absolute left-0 top-0 w-[700px] h-[320px] border border-white"
               ></div>
               <div className="py-10 px-16">
-                <h2 className="text-5xl py-4">{paragraphs[1].title}</h2>
-                {paragraphs[1].text}
+                <h2 className="text-5xl py-4">Governance</h2>
+                Create a post about an issue you’d like to address. Open up the
+                discussion to comments and up/down feedback. If it gains
+                traction, refine the text, promote the comment to a proposal,
+                and put it to a vote. Who can vote and voting periods are all
+                set with easy drop down and smart form functions.
               </div>
             </div>
           </FixedContainer>
         </div>
-        <div id="about" data-scroll-section className="h-screen">
-          <FixedContainer className="flex flex-col gap-52 text-white font-source">
-            <p
-              data-scroll
-              data-scroll-sticky
-              data-scroll-target="#about"
-              data-scroll-repeat
-              className="pt-28 w-[624px] text-4xl"
-            >
-              {bullets[0].sectionTitle}
-            </p>
-            <div className="w-[624px] place-self-end">
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <MdFamilyRestroom size={40} />
-                {bullets[0].title}
-              </h3>
-              <p className="text-xl">{bullets[0].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <AiFillHome size={40} />
-                {bullets[1].title}
-              </h3>
-              <p className="text-xl">{bullets[1].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <FaHandshake size={40} />
-                {bullets[2].title}
-              </h3>
-              <p className="text-xl">{bullets[2].text}</p>
-              <h3 className="text-3xl my-5"></h3>
-            </div>
-          </FixedContainer>
-        </div>
-        <div
-          id="build-a-community"
-          data-scroll-section
-          className="h-[1250px] mt-[1100px]"
-        >
-          <FixedContainer className="flex flex-col gap-52 text-white font-source">
-            <p
-              data-scroll
-              data-scroll-sticky
-              data-scroll-target="#build-a-community"
-              data-scroll-repeat
-              className="pt-28 w-[624px] text-4xl"
-            >
-              {bullets[3].sectionTitle}
-            </p>
-            <div className="w-[624px] place-self-end">
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[3].title}
-              </h3>
-              <p className="text-xl">{bullets[3].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[4].title}
-              </h3>
-              <p className="text-xl">{bullets[4].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[5].title}
-              </h3>
-              <p className="text-xl">{bullets[5].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[6].title}
-              </h3>
-              <p className="text-xl">{bullets[6].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[7].title}
-              </h3>
-              <p className="text-xl">{bullets[7].text}</p>
-            </div>
-          </FixedContainer>
-        </div>
-        <div
-          data-scroll-section
-          id="nested-council"
-          className="h-[2300px] mt-[1100px]"
-        >
-          <FixedContainer className="flex gap-52 text-white font-source justify-center">
+        <div id="federated-nested-councils" data-scroll-section className="">
+          <FixedContainer className="flex flex-col gap-44 h-[1300px]">
             <div
-              data-scroll
-              data-scroll-sticky
-              data-scroll-target="#nested-council"
-              className="mt-[300px]"
-            >
-              <Image
-                src="/static/images/nested-council.png"
-                width="500"
-                height="500"
-              />
-            </div>
-            <div className="w-[624px] pt-24">
-              <h3 className="flex text-5xl">{bullets[8].sectionTitle}</h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[8].title}
-              </h3>
-              <p className="text-xl">{bullets[8].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[9].title}
-              </h3>
-              <p className="text-xl">{bullets[9].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[10].title}
-              </h3>
-              <p className="text-xl">{bullets[10].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[11].title}
-              </h3>
-              <p className="text-xl">{bullets[11].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[12].title}
-              </h3>
-              <p className="text-xl">{bullets[12].text}</p>
-              <h3 className="flex text-5xl pt-10">{bullets[8].sectionTitle}</h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[8].title}
-              </h3>
-              <p className="text-xl">{bullets[8].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[9].title}
-              </h3>
-              <p className="text-xl">{bullets[9].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[10].title}
-              </h3>
-              <p className="text-xl">{bullets[10].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[11].title}
-              </h3>
-              <p className="text-xl">{bullets[11].text}</p>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                {bullets[12].title}
-              </h3>
-              <p className="text-xl">{bullets[12].text}</p>
-            </div>
-          </FixedContainer>
-        </div>
-        <div data-scroll-section>
-          <FixedContainer className="h-screen flex flex-col justify-center items-center gap-28 text-white font-source">
-            <div
+              className="w-[624px] text-white font-source"
               ref={coalitionImage}
               data-scroll
-              data-scroll-class="animate-appear-slowly"
+              data-scroll-direction="horizontal"
+              data-scroll-speed="-0.8"
+            >
+              <h2 className="text-5xl py-4 whitespace-nowrap">
+                Federated Nested Councils
+              </h2>
+            </div>
+            <div
+              className="place-self-end"
+              ref={coalitionImage}
+              data-scroll
+              data-scroll-direction="horizontal"
+              data-scroll-speed="0.8"
             >
               <Image
                 src="/static/images/nested-councils.png"
@@ -290,7 +185,115 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             </div>
           </FixedContainer>
         </div>
-        <div data-scroll-section className="mt-[500px]">
+        <div id="collective-negotiation" data-scroll-section className="">
+          <FixedContainer className="flex flex-col gap-44 h-[1300px]">
+            <div
+              className="w-[624px] text-white font-source place-self-end"
+              ref={coalitionImage}
+              data-scroll
+              data-scroll-direction="horizontal"
+              data-scroll-speed="0.8"
+            >
+              <h2 className="text-5xl py-4 whitespace-nowrap">
+                Collective Negotiation
+              </h2>
+            </div>
+            <div
+              ref={coalitionImage}
+              data-scroll
+              data-scroll-direction="horizontal"
+              data-scroll-speed="-0.8"
+            >
+              <Image
+                src="/static/images/nested-councils.png"
+                width="900"
+                height="400"
+              />
+            </div>
+          </FixedContainer>
+        </div>
+        <div id="about" data-scroll-section className="h-screen mb-[700px]">
+          <FixedContainer className="flex flex-col gap-52 text-white font-source">
+            <p
+              data-scroll
+              data-scroll-sticky
+              data-scroll-target="#about"
+              data-scroll-repeat
+              className="pt-28 w-[624px] text-4xl"
+            >
+              Services & Benefits
+            </p>
+            <div className="w-[624px] place-self-end">
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                <MdFamilyRestroom size={40} />
+                First Service
+              </h3>
+              <p className="text-xl">First Service</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                <AiFillHome size={40} />
+                Second Service
+              </h3>
+              <p className="text-xl">Second Service</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                <FaHandshake size={40} />
+                Third Service
+              </h3>
+              <p className="text-xl">Third Service</p>
+              <h3 className="text-3xl my-5"></h3>
+            </div>
+          </FixedContainer>
+        </div>
+        <div data-scroll-section className="">
+          <FixedContainer className="flex h-[1300px] gap-20">
+            <div className=" text-white font-source relative">
+              <div
+                data-scroll
+                data-scroll-direction="vertical"
+                data-scroll-speed="0.5"
+                ref={borderIn}
+                className="absolute left-0 top-0 w-[500px] h-[320px] border border-white"
+              ></div>
+              <div
+                ref={borderOut}
+                data-scroll
+                data-scroll-direction="horizontal"
+                data-scroll-speed="-0.5"
+                className="absolute left-0 top-0 w-[500px] h-[320px] border border-white"
+              ></div>
+              <div className="py-10 px-16 w-[500px]">
+                <h2 className="text-5xl py-4">Homeownership</h2>
+                INDV believes in your right to ownership and self management and
+                we support renters organizing and negotiating to buy their
+                building directly from the landlord.{" "}
+              </div>
+            </div>
+            <div className="w-[624px] text-white font-source relative mt-64">
+              <div
+                data-scroll
+                data-scroll-direction="vertical"
+                data-scroll-speed="0.5"
+                ref={borderIn}
+                className="absolute left-0 top-0 w-[600px] h-[420px] border border-white"
+              ></div>
+              <div
+                ref={borderOut}
+                data-scroll
+                data-scroll-direction="horizontal"
+                data-scroll-speed="-0.5"
+                className="absolute left-0 top-0 w-[600px] h-[420px] border border-white"
+              ></div>
+              <div className="py-10 px-16 w-[600px]">
+                <h2 className="text-5xl py-4">Community Entrepreneurship</h2>
+                Through partnership with our members and cooperative-style
+                financial institutions and credit unions, we hope to make
+                affordable loans together to support your projects that bring
+                life and fill the needs that are not being met in your
+                neighborhoods, by offering capital, without putting you in debt.{" "}
+              </div>
+            </div>
+          </FixedContainer>
+        </div>
+        <div data-scroll-section className="">
           <FixedContainer className="h-screen flex flex-col justify-center items-center gap-28 text-white font-source">
             <button
               className="border-4 border-white p-4 text-3xl w-[300px]"
@@ -311,28 +314,28 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const paragraphs = await fetchStrapiHomePage();
-  const bullets = await fetchStrapiBullets();
+// export const getServerSideProps = async () => {
+//   const paragraphs = await fetchStrapiHomePage();
+//   const bullets = await fetchStrapiBullets();
 
-  return {
-    props: {
-      paragraphs: paragraphs
-        .filter((p) => p.attributes.title !== null)
-        .map((p) => ({
-          title: p.attributes.title,
-          text: p.attributes.paragraph,
-          subtitle: p.attributes.subtitle ?? "",
-        })),
-      bullets: bullets
-        .filter((p) => p.attributes.title !== null)
-        .map((p) => ({
-          title: p.attributes.title,
-          text: p.attributes.paragraph,
-          sectionTitle: p.attributes.sectionTitle,
-        })),
-    },
-  };
-};
+//   return {
+//     props: {
+//       paragraphs: paragraphs
+//         .filter((p) => p.attributes.title !== null)
+//         .map((p) => ({
+//           title: p.attributes.title,
+//           text: p.attributes.paragraph,
+//           subtitle: p.attributes.subtitle ?? "",
+//         })),
+//       bullets: bullets
+//         .filter((p) => p.attributes.title !== null)
+//         .map((p) => ({
+//           title: p.attributes.title,
+//           text: p.attributes.paragraph,
+//           sectionTitle: p.attributes.sectionTitle,
+//         })),
+//     },
+//   };
+// };
 
 export default Home;
