@@ -6,7 +6,7 @@ import {
   LocomotiveScrollProvider,
   useLocomotiveScroll,
 } from "react-locomotive-scroll";
-import { MdFamilyRestroom } from "react-icons/md";
+import { MdAttachMoney, MdFamilyRestroom } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import { FaHandshake } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
@@ -16,6 +16,7 @@ import {
   fetchStrapiBullets,
   fetchStrapiHomePage,
 } from "@/backend/services/strapi";
+import { BiHealth, BiMoney } from "react-icons/bi";
 
 interface Section {
   title: string;
@@ -219,26 +220,31 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               data-scroll-sticky
               data-scroll-target="#about"
               data-scroll-repeat
-              className="pt-28 w-[624px] text-4xl"
+              className="pt-44 w-[624px] text-4xl"
             >
               Services & Benefits
             </p>
             <div className="w-[624px] place-self-end">
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <MdFamilyRestroom size={40} />
-                First Service
+                <BiHealth size={40} />
+                Healthcare
               </h3>
-              <p className="text-xl">First Service</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <AiFillHome size={40} />
-                Second Service
+                <MdAttachMoney size={40} />
+                Discounts
               </h3>
-              <p className="text-xl">Second Service</p>
               <h3 className="flex gap-5 text-3xl pt-10 pb-5">
                 <FaHandshake size={40} />
                 Third Service
               </h3>
-              <p className="text-xl">Third Service</p>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                <FaHandshake size={40} />
+                Fourth Service
+              </h3>
+              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
+                <FaHandshake size={40} />
+                Fifth Service
+              </h3>
               <h3 className="text-3xl my-5"></h3>
             </div>
           </FixedContainer>
