@@ -67,6 +67,7 @@ export interface Comment {
   text: string;
   headComment: number;
   userId: number;
+  title: string;
 }
 
 export type TransactionStatus = "SUCCESS" | "PENDING" | "FAILED";

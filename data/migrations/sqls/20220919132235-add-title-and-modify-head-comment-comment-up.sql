@@ -1,0 +1,1 @@
+ALTER TABLE `comment` ADD `title` VARCHAR(255) NULL;
