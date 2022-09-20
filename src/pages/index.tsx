@@ -159,7 +159,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           </FixedContainer>
         </div>
         <div id="federated-nested-councils" data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-44 h-[1300px]">
+          <FixedContainer className="flex flex-col gap-20 h-[1300px]">
             <div
               className="w-[624px] text-white font-source"
               ref={coalitionImage}
@@ -170,6 +170,11 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               <h2 className="text-5xl py-4 whitespace-nowrap">
                 Federated Nested Councils
               </h2>
+              <h3 className="text-xl py-4">
+                Uniting across blockchains has never been easier and with
+                Indivisible your org can build coalitions with others based on
+                location or interest.{" "}
+              </h3>
             </div>
             <div
               className="place-self-end"
@@ -187,7 +192,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           </FixedContainer>
         </div>
         <div id="collective-negotiation" data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-44 h-[1300px]">
+          <FixedContainer className="flex flex-col gap-20 h-[1300px]">
             <div
               className="w-[624px] text-white font-source place-self-end"
               ref={coalitionImage}
@@ -198,6 +203,14 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               <h2 className="text-5xl py-4 whitespace-nowrap">
                 Collective Negotiation
               </h2>
+              <h3 className="text-xl py-4">
+                As a group of tenants with common interests we’ll work together
+                to seek out the best bargains to meet our members needs and
+                reduce your cost of living expenses. With your group of family,
+                friends, roommates, or building, select the deals that suit your
+                needs and your wallet. Propose a plan, comment and vote on it,
+                and automatically split the bill and the savings.
+              </h3>
             </div>
             <div
               ref={coalitionImage}
