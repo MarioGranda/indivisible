@@ -49,7 +49,7 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
     <section className={_class}>
       <Link passHref href={getDaoUrl(dao.slug)}>
         <a>
-          <article className="bg-black cursor-pointer rounded-xl h-[320px] p-4">
+          <article className="bg-black cursor-pointer rounded-xl h-[370px] p-4">
             <div className="relative flex justify-center h-[200px] rounded-xl">
               <Image
                 src={dao.image}
@@ -61,14 +61,14 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
               />
             </div>
 
-            <div className="flex flex-col py-4 justify-between items-start">
+            <div className="flex flex-col py-4 min-h-[150px] justify-between items-start">
               <h3
                 title={dao.name}
-                className="text-lg font-source leading-normal text-white whitespace-nowrap truncate"
+                className="text-lg font-source leading-normal text-white"
               >
                 {dao.name}
               </h3>
-              <div className="flex justify-between">
+              <div className="flex items-end">
                 <button
                   onClick={(e) => join(e)}
                   className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg"
