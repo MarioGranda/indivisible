@@ -288,7 +288,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
               min={0}
             />
           </div>
-          <h2 className="text-3xl font-source font-bold">Minimum standards</h2>
+          <h2 className="text-3xl font-source font-bold">Governance</h2>
           <div className="flex gap-7">
             <Input
               name="minConsensusPeriod"

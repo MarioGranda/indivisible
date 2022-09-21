@@ -19,5 +19,6 @@ export const daoMapper = (result: Record<string, any>): Dao => {
     transactionHash: result.transaction_hash,
     createdAt: result.created_at.toJSON(),
     updatedAt: result.updated_at.toJSON(),
+    level: result.level,
   };
 };
