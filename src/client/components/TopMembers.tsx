@@ -8,7 +8,7 @@ interface Props {
 
 const TopMembers: FC<Props> = ({ topMembers }) => {
   return (
-    <div className="col-span-1 h-[300px] flex flex-col gap-4 items-center text-3xl border-2 rounded-md border-white py-2">
+    <div className="col-span-1 min-h-[300px] flex flex-col gap-4 items-center text-3xl border-2 rounded-md border-white py-8">
       <span className="text-3xl">Top members</span>
       {topMembers.map((user, i) => (
         <div key={user.id} className="grid grid-cols-3 gap-4  mx-4">

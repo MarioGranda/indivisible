@@ -22,6 +22,7 @@ export const findUsersByDao = async (daoId: number): Promise<User[]> => {
   const query = `select u.*,
         (select count(*) from ${TABLE_NAMES.PROPOSAL} p where p.user_id = u.id) proposals_count
         from ${TABLE_NAMES.USER} u
+        where dao_id = ?
         order by proposals_count desc
       `;
   const pool = await getPool();
