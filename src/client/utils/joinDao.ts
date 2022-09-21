@@ -9,9 +9,13 @@ export async function joinDao(daoAddress: string, provider: JsonRpcProvider) {
   const contract = new ethers.Contract(daoAddress, Dao.abi, signer);
 
   const transaction = await contract.join();
-  await transaction.wait();
+  const result = await transaction.wait();
 
   return {
     signerAddress: await signer.getAddress(),
+    result: {
+      transactionHash: result.transactionHash,
+      status: result.status,
+    },
   };
 }

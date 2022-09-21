@@ -12,6 +12,7 @@ export const insertUser = async (input: JoinDaoInput): Promise<number> => {
 
   const [rows] = await insertOne(connection, TABLE_NAMES.USER, {
     address: input.signerAddress,
+    dao_id: input.daoId,
   });
 
   return rows.insertId;

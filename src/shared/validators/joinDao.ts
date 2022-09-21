@@ -5,6 +5,7 @@ import { ETHEREUM_ADDRESS_REGEX } from "../constants/ethRegexAddress";
 export const JoinDaoInput = z
   .object({
     signerAddress: z.string().regex(ETHEREUM_ADDRESS_REGEX),
+    daoId: z.number().min(1),
   })
   .strict();
 

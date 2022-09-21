@@ -1,12 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 import { Dao } from "@/shared/models";
 import { getDaoUrl } from "@/shared/utils/createUrls";
 import { joinDao } from "../utils/joinDao";
 import getProvider from "@/shared/utils/getProvider";
 import axios from "axios";
 import classNames from "classnames";
+import {
+  openPendingTransactionNotification,
+  openTransactionCompleteNotification,
+  openTransactionFailedNotification,
+} from "../redux/actions/notification";
+import { useDispatch } from "react-redux";
 //import { DEFAULT_IMAGE_PLACEHOLDER } from "@/shared/constants/path";
 
 interface Props {
@@ -17,13 +23,26 @@ interface Props {
 
 const DaoCard: FC<Props> = ({ dao, className }) => {
   const _class = classNames("w-[250px] text-white", className);
+  const dispatch = useDispatch();
 
-  const join = async () => {
-    const { signerAddress } = await joinDao(dao.address, getProvider());
-    if (!signerAddress) {
-      return;
+  const join = async (e: MouseEvent) => {
+    try {
+      e.preventDefault();
+      await dispatch(openPendingTransactionNotification(dao.image));
+      const { signerAddress, result } = await joinDao(
+        dao.address,
+        getProvider()
+      );
+      if (!signerAddress) {
+        return;
+      }
+      console.log(result);
+      await axios.post("/api/join-dao", { signerAddress, daoId: dao.id });
+      await dispatch(openTransactionCompleteNotification(result, dao.image));
+    } catch (e) {
+      console.log(e);
+      await dispatch(openTransactionFailedNotification(e));
     }
-    await axios.post("/api/join-dao", { signerAddress });
   };
 
   return (
@@ -51,7 +70,7 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
               </h3>
               <div className="flex justify-between">
                 <button
-                  onClick={join}
+                  onClick={(e) => join(e)}
                   className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg"
                 >
                   Join +
