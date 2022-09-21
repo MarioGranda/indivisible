@@ -17,7 +17,7 @@ const Explore: FC<Props> = ({ daos }) => {
   ));
   return (
     <div className="explore-bg bg-cover">
-      <Hero dao={daos[0]} />
+      <Hero dao={daos[1]} />
       <FixedContainer className="mt-5 pb-80">
         <h2 className="text-white text-center font-source text-4xl my-5">
           Latest DAOs

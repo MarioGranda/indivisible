@@ -22,7 +22,11 @@ interface Props {
 }
 
 const DaoCard: FC<Props> = ({ dao, className }) => {
-  const _class = classNames("w-[250px] text-white", className);
+  const _class = classNames(
+    "w-[250px] text-white",
+    className,
+    dao.level > 1 ? "border-4 rounded-md" : ""
+  );
   const dispatch = useDispatch();
 
   const join = async (e: MouseEvent) => {
@@ -68,13 +72,21 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
               >
                 {dao.name}
               </h3>
-              <div className="flex items-end">
+              <div className="flex items-center gap-10">
                 <button
                   onClick={(e) => join(e)}
-                  className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg"
+                  className="rounded-xl flex items-center h-10 font-bold my-2 bg-black border border-white disabled:opacity-50 enabled:hover:border-green p-4 shadow-lg truncate"
                 >
                   Join +
                 </button>
+                {dao.level > 1 && (
+                  <h3
+                    title="coalition"
+                    className="text-md font-source leading-normal text-white"
+                  >
+                    Coalition
+                  </h3>
+                )}
               </div>
             </div>
           </article>

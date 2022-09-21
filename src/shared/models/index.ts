@@ -32,6 +32,7 @@ export interface Dao {
   transactionHash: string;
   createdAt: string;
   updatedAt: string;
+  level: number;
 }
 
 export interface Proposal {

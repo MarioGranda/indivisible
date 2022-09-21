@@ -6,9 +6,23 @@ import {
   LocomotiveScrollProvider,
   useLocomotiveScroll,
 } from "react-locomotive-scroll";
-import { MdAttachMoney, MdFamilyRestroom } from "react-icons/md";
-import { AiFillHome } from "react-icons/ai";
+import {
+  MdAttachMoney,
+  MdDoNotTouch,
+  MdElectricBike,
+  MdFamilyRestroom,
+  MdPhoneIphone,
+} from "react-icons/md";
+import { TbRouter } from "react-icons/tb";
 import { FaHandshake } from "react-icons/fa";
+import { HiShieldCheck } from "react-icons/hi";
+import {
+  GiBrain,
+  GiDiscussion,
+  GiHealingShield,
+  GiScrollQuill,
+  GiVote,
+} from "react-icons/gi";
 import Marquee from "react-fast-marquee";
 import { BENEFITS } from "@/client/utils/benefits";
 import { useRouter } from "next/router";
@@ -16,7 +30,8 @@ import {
   fetchStrapiBullets,
   fetchStrapiHomePage,
 } from "@/backend/services/strapi";
-import { BiHealth, BiMoney } from "react-icons/bi";
+import { BsDot } from "react-icons/bs";
+import { AiFillBank } from "react-icons/ai";
 
 interface Section {
   title: string;
@@ -89,20 +104,24 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           </FixedContainer>
         </div>
         <div data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-52">
+          <FixedContainer className="flex flex-col gap-20">
             <p className="w-[624px] text-white font-source text-2xl">
               Indivisible is a<b> global nonprofit federation </b>of independent
               tenants groups and common interest coalitions, united in
               bargaining power and member benefits to improve access to and
               affordability of quality of life services.
             </p>
-            <p className="w-[624px] place-self-end text-white font-source text-2xl">
-              Our <b>mission</b> is to promote the self-determination and
-              economic and cultural security of impacted tenants around the
-              globe, regardless of age, gender, race, or unique identity through
-              the linking of existing associations and by organizing new groups
-              of tenants.{" "}
-            </p>
+            <div className="place-self-end">
+              <p className="text-white font-source text-3xl pb-6 font-bold">
+                Mission
+              </p>
+              <p className="w-[624px] text-white font-source text-2xl border-4 border-white p-6">
+                To promote the self-determination and economic and cultural
+                empowerment of impacted tenants around the globe, regardless of
+                age, gender, race, or unique identity through the linking of
+                existing associations and by organizing new groups of tenants.{" "}
+              </p>
+            </div>
           </FixedContainer>
         </div>
         <div
@@ -121,45 +140,87 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         </div>
         <div data-scroll-section className="">
           <FixedContainer className="flex flex-col gap-10 h-[1500px]">
-            <div className="w-[624px] text-white font-source">
-              <h2 className="text-5xl py-4">Org Creation</h2>
-              <h3 className="text-3xl py-4">
-                There are over 50 well established tenants associations in New
-                York alone.
-              </h3>
-              In Berlin almost 10% of the city population belong to one of the
-              two main tenants associations and the trend is common across the
-              world. With raising rent and living costs and changing city
-              politics, now is an opportune time to organize and unite.
+            <div className="flex w-[624px] text-white font-source">
+              <div className="flex-col">
+                <h2 className="text-5xl py-4">Org Creation</h2>
+                <h3 className="text-3xl py-4">New York</h3>
+                <h4 className="text-xl">
+                  50+ well stablished tenants associations.
+                </h4>
+                <h3 className="text-3xl py-4">Berlin</h3>
+                <h4 className="text-xl">
+                  ~10% of residents are part of one of the two largest
+                  Mieterverein (renters associations)
+                </h4>
+                <h3 className="text-3xl py-4">Your city</h3>
+                <h4 className="text-xl">
+                  With raising rent and living costs and changing city politics,
+                  now is an opportune time to organize and unite.
+                </h4>
+              </div>
+              <div className="flex-col">
+                <Image
+                  src="/static/images/ny-aereal.png"
+                  width="400"
+                  height="400"
+                />
+              </div>
             </div>
-            <div className="w-[624px] text-white font-source place-self-end relative">
+            <div className="w-[800px] text-white font-source place-self-end relative">
               <div
                 data-scroll
                 data-scroll-direction="vertical"
                 data-scroll-speed="1"
                 ref={borderIn}
-                className="absolute left-0 top-0 w-[700px] h-[320px] border border-white"
+                className="absolute left-0 top-0 w-[700px] h-[420px] border border-white"
               ></div>
               <div
                 ref={borderOut}
                 data-scroll
                 data-scroll-direction="horizontal"
                 data-scroll-speed="-1"
-                className="absolute left-0 top-0 w-[700px] h-[320px] border border-white"
+                className="absolute left-0 top-0 w-[700px] h-[420px] border border-white"
               ></div>
-              <div className="py-10 px-16">
-                <h2 className="text-5xl py-4">Governance</h2>
+              <div className="flex py-10 px-16">
+                <div className="flex flex-col">
+                  <h2 className="text-5xl py-4">Governance</h2>
+                  <div className="flex items-center py-4">
+                    <GiBrain size={40} />
+                    <p className="px-4 text-2xl">Ideate</p>
+                  </div>
+                  <div className="flex items-center pb-4">
+                    <GiDiscussion size={40} />
+                    <p className="px-4 text-2xl">Discuss</p>
+                  </div>
+                  <div className="flex items-center pb-4">
+                    <GiScrollQuill size={40} />
+                    <p className="px-4 text-2xl">Propose</p>
+                  </div>
+                  <div className="flex items-center pb-4">
+                    <GiVote size={40} />
+                    <p className="px-4 text-2xl">Vote</p>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center w-[300px] h-[300px] self-center mt-16">
+                  Create a post about an issue you’d like to address. Open up
+                  the discussion to comments and up/down feedback. If it gains
+                  traction, refine the text, promote the comment to a proposal,
+                  and put it to a vote. Who can vote and voting periods are all
+                  set with easy drop down and smart form functions.
+                </div>
+                {/* <h2 className="text-xl py-4">
                 Create a post about an issue you’d like to address. Open up the
                 discussion to comments and up/down feedback. If it gains
                 traction, refine the text, promote the comment to a proposal,
                 and put it to a vote. Who can vote and voting periods are all
                 set with easy drop down and smart form functions.
+                </h2> */}
               </div>
             </div>
           </FixedContainer>
         </div>
         <div id="federated-nested-councils" data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-20 h-[1300px]">
+          <FixedContainer className="flex flex-col gap-10 h-[800px]">
             <div
               className="w-[624px] text-white font-source"
               ref={coalitionImage}
@@ -171,9 +232,11 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 Federated Nested Councils
               </h2>
               <h3 className="text-xl py-4">
-                Uniting across blockchains has never been easier and with
-                Indivisible your org can build coalitions with others based on
-                location or interest.{" "}
+                Uniting across blockchains has never been easier.
+                <p>
+                  Build <b>coalitions</b> with others based on location or
+                  interest.{" "}
+                </p>
               </h3>
             </div>
             <div
@@ -185,14 +248,14 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             >
               <Image
                 src="/static/images/nested-councils.png"
-                width="900"
-                height="400"
+                width="700"
+                height="300"
               />
             </div>
           </FixedContainer>
         </div>
         <div id="collective-negotiation" data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-20 h-[1300px]">
+          <FixedContainer className="flex flex-col gap-20 h-[800px]">
             <div
               className="w-[624px] text-white font-source place-self-end"
               ref={coalitionImage}
@@ -212,7 +275,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 and automatically split the bill and the savings.
               </h3>
             </div>
-            <div
+            {/* <div
               ref={coalitionImage}
               data-scroll
               data-scroll-direction="horizontal"
@@ -223,7 +286,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 width="900"
                 height="400"
               />
-            </div>
+            </div> */}
           </FixedContainer>
         </div>
         <div id="about" data-scroll-section className="h-screen mb-[700px]">
@@ -233,32 +296,35 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               data-scroll-sticky
               data-scroll-target="#about"
               data-scroll-repeat
-              className="pt-44 w-[624px] text-4xl"
+              className="pt-44 w-[524px] text-4xl"
             >
               Services & Benefits
+              <p className="pt-8 text-xl">
+                Members receive group rates & discounts just like family and
+                business plans & select credit card holders.
+              </p>
             </p>
-            <div className="w-[624px] place-self-end">
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <BiHealth size={40} />
-                Healthcare
+            <div className="pl-20 w-[624px] place-self-end">
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <MdPhoneIphone size={40} />
+                Cellular & data
               </h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <MdAttachMoney size={40} />
-                Discounts
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <TbRouter size={40} />
+                Home cable & Internet
               </h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <FaHandshake size={40} />
-                Third Service
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <HiShieldCheck size={40} />
+                Renters/Travel insurance
               </h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <FaHandshake size={40} />
-                Fourth Service
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <MdElectricBike size={40} />
+                Community e-bike & car share
               </h3>
-              <h3 className="flex gap-5 text-3xl pt-10 pb-5">
-                <FaHandshake size={40} />
-                Fifth Service
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <AiFillBank size={40} />
+                Community banking & microloans
               </h3>
-              <h3 className="text-3xl my-5"></h3>
             </div>
           </FixedContainer>
         </div>
@@ -292,14 +358,14 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 data-scroll-direction="vertical"
                 data-scroll-speed="0.5"
                 ref={borderIn}
-                className="absolute left-0 top-0 w-[600px] h-[420px] border border-white"
+                className="absolute left-0 top-0 w-[600px] h-[640px] border border-white"
               ></div>
               <div
                 ref={borderOut}
                 data-scroll
                 data-scroll-direction="horizontal"
                 data-scroll-speed="-0.5"
-                className="absolute left-0 top-0 w-[600px] h-[420px] border border-white"
+                className="absolute left-0 top-0 w-[600px] h-[640px] border border-white"
               ></div>
               <div className="py-10 px-16 w-[600px]">
                 <h2 className="text-5xl py-4">Community Entrepreneurship</h2>
@@ -308,6 +374,24 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 affordable loans together to support your projects that bring
                 life and fill the needs that are not being met in your
                 neighborhoods, by offering capital, without putting you in debt.{" "}
+              </div>
+              <div className="pl-20">
+                <h3 className="flex gap-5 text-xl">
+                  <BsDot size={40} />
+                  Food cooperative
+                </h3>
+                <h3 className="flex gap-5 text-xl">
+                  <BsDot size={40} />
+                  Coworking space
+                </h3>
+                <h3 className="flex gap-5 text-xl">
+                  <BsDot size={40} />
+                  Pre-k & aftercare
+                </h3>
+                <h3 className="flex gap-5 text-xl">
+                  <BsDot size={40} />
+                  Recreational, educational & artistic programming
+                </h3>
               </div>
             </div>
           </FixedContainer>
@@ -320,7 +404,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             >
               Get Started
             </button>
-            <Marquee className="text-2xl" gradient={false} speed={15}>
+            <Marquee className="text-2xl" gradient={false} speed={40}>
               {BENEFITS.join(" | ")}
             </Marquee>
           </FixedContainer>
