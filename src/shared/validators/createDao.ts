@@ -19,6 +19,7 @@ export const CreateDaoInput = z
     transactionHash: z.string().min(1).max(255),
     merkleTreeLeaves: z.string().array().optional(),
     isCoalitionDao: z.boolean(),
+    level: z.number().min(1),
   })
   .strict();
 

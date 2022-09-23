@@ -202,6 +202,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
             daoAddress,
             transactionHash,
             merkleTreeLeaves: childrenDaosAddresses,
+            level: formInput.isCoalitionDao ? 2 : 1,
           },
           {
             headers: {

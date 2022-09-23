@@ -26,6 +26,7 @@ export const insertDao = async (input: CreateDaoInput): Promise<number> => {
     min_voting_deadline: input.minVotingPeriod,
     transaction_hash: input.transactionHash,
     merkle_tree: JSON.stringify(input.merkleTreeLeaves),
+    level: input.level,
   });
 
   return rows.insertId;
