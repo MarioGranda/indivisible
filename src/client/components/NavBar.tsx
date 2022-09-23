@@ -44,7 +44,7 @@ const NavBar = () => {
               <Link passHref href="/">
                 <a>
                   <div className="self-center cursor-pointer">
-                    <p className="font-source font-bold text-xl">
+                    <p className="font-source font-bold md:text-xl text-sm">
                       INDIVISIBLE DAO
                     </p>
                   </div>

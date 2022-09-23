@@ -30,7 +30,7 @@ const ProposalsTable: FC<Props> = ({ dao, proposals, title }) => {
           <div key={p.id}>
             <Link passHref href={getProposalUrl(dao.slug, p.id)}>
               <a>
-                <div className="grid grid-cols-3 gap-4 w-full border rounded-md border-white py-2">
+                <div className="grid grid-cols-3 gap-4 w-full border rounded-md border-white py-2 mb-4">
                   <div className="flex items-center justify-start px-6">
                     {p.name}
                   </div>

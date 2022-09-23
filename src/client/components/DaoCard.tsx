@@ -42,7 +42,13 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
       }
       console.log(result);
       await axios.post("/api/join-dao", { signerAddress, daoId: dao.id });
-      await dispatch(openTransactionCompleteNotification(result, dao.image));
+      await dispatch(
+        openTransactionCompleteNotification(
+          result,
+          dao.image,
+          `Welcome to ${dao.name}!`
+        )
+      );
     } catch (e) {
       console.log(e);
       await dispatch(openTransactionFailedNotification(e));

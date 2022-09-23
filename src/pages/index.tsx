@@ -140,9 +140,29 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         </div>
         <div data-scroll-section className="">
           <FixedContainer className="flex flex-col gap-10 h-[1500px]">
-            <div className="flex w-[624px] text-white font-source">
+            <div className="flex text-white font-source">
               <div className="flex-col">
-                <h2 className="text-5xl py-4">Org Creation</h2>
+                <h2 className="text-5xl py-4 mb-5">Org Creation</h2>
+                <div className="flex gap-20">
+                  <div className="flex-col">
+                    <Image
+                      src="/static/images/ny-aereal.png"
+                      width="300"
+                      height="255"
+                      className="rounded-xl"
+                    />
+                  </div>
+                  <div className="flex-col md:mt-36">
+                    <Image
+                      src="/static/images/berlin-aereal.jpeg"
+                      width="300"
+                      height="255"
+                      className="rounded-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex-col w-[500px] ml-20 mt-16">
                 <h3 className="text-3xl py-4">New York</h3>
                 <h4 className="text-xl">
                   50+ well stablished tenants associations.
@@ -157,13 +177,6 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                   With raising rent and living costs and changing city politics,
                   now is an opportune time to organize and unite.
                 </h4>
-              </div>
-              <div className="flex-col">
-                <Image
-                  src="/static/images/ny-aereal.png"
-                  width="400"
-                  height="400"
-                />
               </div>
             </div>
             <div className="w-[800px] text-white font-source place-self-end relative">

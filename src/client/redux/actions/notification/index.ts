@@ -32,12 +32,12 @@ export const openPendingTransactionNotification = (image: string) => {
 
 export const openTransactionCompleteNotification = (
   result: any,
-  image: string
+  image: string,
+  title?: string
 ) => {
   const { status, transactionHash } = result;
   return openNotification({
-    title:
-      status === 1 ? "DAO createad successfully" : "Oops Something went wrong",
+    title: title ? title : "DAO createad successfully",
     status: status === 1 ? "SUCCESS" : "FAILED",
     description: "",
     transactionHash: transactionHash,
