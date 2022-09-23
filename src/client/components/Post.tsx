@@ -11,18 +11,18 @@ interface Props {
 }
 
 const Post: FC<Props> = ({ proposalId, comments, className }) => {
-  const [showText, setShowText] = useState(false);
+  const [showText, setShowText] = useState(true);
   const [isReplyActive, setIsReplyActive] = useState(false);
   const [reply, setReply] = useState(null);
 
   const threadComments = comments.map((comment, i) => (
-    <div key={i}>
+    <div key={i} className="py-6">
       {showText && (
         <div className="flex flex-col">
           <div className="border border-white rounded-md w-full p-2 bg-black text-white font-source py-4 px-8">
             <p>{comment.text}</p>
           </div>
-          {i === 0 && (
+          {i === comments.length - 1 && (
             <button
               className="flex gap-5 items-center place-self-end rounded-md bg-black border mt-5 p-4 enabled:hover:border-green disabled:opacity-50 mb-10"
               onClick={() => setIsReplyActive(true)}
@@ -33,7 +33,7 @@ const Post: FC<Props> = ({ proposalId, comments, className }) => {
           )}
         </div>
       )}
-      {isReplyActive && i === 0 && (
+      {isReplyActive && i === comments.length - 1 && (
         <div className="flex flex-col">
           <div className="self-end">
             <MdClose
@@ -73,11 +73,6 @@ const Post: FC<Props> = ({ proposalId, comments, className }) => {
 
   return (
     <div className="flex flex-col text-white font-source w-full">
-      <button onClick={() => setShowText(!showText)}>
-        <div className="border border-white rounded-md p-2 bg-black py-4 px-8 my-10 w-fit">
-          <p>{comments[0].title}</p>
-        </div>
-      </button>
       {threadComments}
     </div>
   );

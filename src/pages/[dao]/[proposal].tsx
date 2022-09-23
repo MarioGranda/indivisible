@@ -46,15 +46,18 @@ const Proposal: FC<Props> = ({ proposalId, comments }) => {
   };
 
   return (
-    <div className="explore-bg bg-cover text-white font-source min-h-screen">
+    <div className="explore-bg bg-cover text-white font-source min-h-screen pb-20">
       <FixedContainer className="flex flex-col justify-items-center gap-5">
-        <button
-          className="flex gap-5 items-center rounded-md bg-black border-2 mt-10 mb-10 p-4 w-[270px] hover:border-green"
-          onClick={() => setIsNewComment(!isNewComment)}
-        >
-          <MdOutlineAdd size={40} />
-          Start discussion
-        </button>
+        <div className="grid grid-cols-2 items-center">
+          <button
+            className="flex gap-5 items-center rounded-md bg-black border-2 mt-10 mb-10 p-4 w-[270px] hover:border-green"
+            onClick={() => setIsNewComment(!isNewComment)}
+          >
+            <MdOutlineAdd size={40} />
+            Start discussion
+          </button>
+          <div className="text-2xl">{comments[0].title}</div>
+        </div>
         {isNewComment && (
           <div className="flex flex-col place-items-start">
             <h2 className="text-2xl font-source font-bold pb-5">Title</h2>
