@@ -7,5 +7,5 @@ export function getProposalUrl(dao: string, proposalId: number) {
 }
 
 export function getPolygonscanUrl(txHash: string) {
-  return `https://mumbai.polygonscan.com/${txHash}`;
+  return `https://mumbai.polygonscan.com/tx/${txHash}`;
 }
