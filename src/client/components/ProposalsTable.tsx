@@ -45,7 +45,7 @@ const ProposalsTable: FC<Props> = ({ dao, proposals, title }) => {
                   <div className="flex items-center gap-14 justify-end px-8">
                     <div>{p.yea}</div>
                     <div>{p.nay}</div>
-                    <div>{p.minQuorum}</div>
+                    <div>{Math.round(p.minQuorum) / 100}%</div>
                   </div>
                 </div>
               </a>
