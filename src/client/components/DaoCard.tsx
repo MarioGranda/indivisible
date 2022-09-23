@@ -88,7 +88,7 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
                 {dao.level > 1 && (
                   <h3
                     title="coalition"
-                    className="text-md font-source leading-normal text-white"
+                    className="text-md font-source leading-normal text-white font-bold"
                   >
                     Coalition
                   </h3>
