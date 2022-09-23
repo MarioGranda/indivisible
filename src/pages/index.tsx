@@ -170,7 +170,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 <h3 className="text-3xl py-4">Berlin</h3>
                 <h4 className="text-xl">
                   ~10% of residents are part of one of the two largest
-                  Mieterverein (renters associations)
+                  Mieterverein (renters associations).
                 </h4>
                 <h3 className="text-3xl py-4">Your city</h3>
                 <h4 className="text-xl">
@@ -320,27 +320,27 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
             <div className="pl-20 w-[624px] place-self-end">
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <MdPhoneIphone size={40} />
-                Cellular & data
+                Cellular & data.
               </h3>
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <TbRouter size={40} />
-                Home cable & Internet
+                Home cable & Internet.
               </h3>
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <HiShieldCheck size={40} />
-                Renters/Travel insurance
+                Renters/Travel insurance.
               </h3>
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <MdElectricBike size={40} />
-                Community e-bike & car share
+                Community e-bike & car share.
               </h3>
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <AiFillBank size={40} />
-                Community banking & microloans
+                Community banking & microloans.
               </h3>
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <FaHandHoldingWater size={40} />
-                Water/air quality testing
+                Water/air quality testing.
               </h3>
             </div>
           </FixedContainer>
@@ -395,19 +395,19 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               <div className="pl-20">
                 <h3 className="flex gap-5 text-xl">
                   <BsDot size={40} />
-                  Food cooperative
+                  Food cooperative.
                 </h3>
                 <h3 className="flex gap-5 text-xl">
                   <BsDot size={40} />
-                  Coworking space
+                  Coworking space.
                 </h3>
                 <h3 className="flex gap-5 text-xl">
                   <BsDot size={40} />
-                  Pre-k & aftercare
+                  Pre-k & aftercare.
                 </h3>
                 <h3 className="flex gap-5 text-xl">
-                  <BsDot size={40} />
-                  Recreational, educational & artistic programming
+                  <BsDot size={50} />
+                  Recreational, educational & artistic programming.
                 </h3>
               </div>
             </div>
