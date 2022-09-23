@@ -20,8 +20,8 @@ const ProposalsTable: FC<Props> = ({ dao, proposals, title }) => {
             <div>Consensus deadline</div>
             <div>Voting deadline</div>
           </div>
-          <div className="flex items-center gap-9 justify-end px-6">
-            <div>Yea</div>
+          <div className="flex items-center gap-14 justify-end px-4">
+            <div className="pr-4">Yea</div>
             <div>Nay</div>
             <div>Quorum</div>
           </div>
@@ -42,9 +42,9 @@ const ProposalsTable: FC<Props> = ({ dao, proposals, title }) => {
                       {new Date(p.votingDeadline).toDateString()}
                     </div>
                   </div>
-                  <div className="flex items-center gap-14 justify-end px-8">
+                  <div className="flex items-center justify-end gap-16 pr-6">
                     <div>{p.yea}</div>
-                    <div>{p.nay}</div>
+                    <div className="pr-2">{p.nay}</div>
                     <div>{Math.round(p.minQuorum) / 100}%</div>
                   </div>
                 </div>
