@@ -14,7 +14,7 @@ import {
   MdPhoneIphone,
 } from "react-icons/md";
 import { TbRouter } from "react-icons/tb";
-import { FaHandshake } from "react-icons/fa";
+import { FaHandHoldingWater, FaHandshake } from "react-icons/fa";
 import { HiShieldCheck } from "react-icons/hi";
 import {
   GiBrain,
@@ -139,7 +139,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           />
         </div>
         <div data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-10 h-[1500px]">
+          <FixedContainer className="flex flex-col gap-44 h-[1500px]">
             <div className="flex text-white font-source">
               <div className="flex-col">
                 <h2 className="text-5xl py-4 mb-5">Org Creation</h2>
@@ -179,20 +179,20 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                 </h4>
               </div>
             </div>
-            <div className="w-[800px] text-white font-source place-self-end relative">
+            <div className="w-[800px] text-white font-source place-self-center relative">
               <div
                 data-scroll
                 data-scroll-direction="vertical"
                 data-scroll-speed="1"
                 ref={borderIn}
-                className="absolute left-0 top-0 w-[700px] h-[420px] border border-white"
+                className="absolute left-0 top-0 w-[700px] h-[450px] border border-white"
               ></div>
               <div
                 ref={borderOut}
                 data-scroll
                 data-scroll-direction="horizontal"
                 data-scroll-speed="-1"
-                className="absolute left-0 top-0 w-[700px] h-[420px] border border-white"
+                className="absolute left-0 top-0 w-[700px] h-[450px] border border-white"
               ></div>
               <div className="flex py-10 px-16">
                 <div className="flex flex-col">
@@ -268,13 +268,13 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
           </FixedContainer>
         </div>
         <div id="collective-negotiation" data-scroll-section className="">
-          <FixedContainer className="flex flex-col gap-20 h-[800px]">
+          <FixedContainer className="flex flex-col gap-20 h-[600px]">
             <div
-              className="w-[624px] text-white font-source place-self-end"
+              className="w-[624px] text-white font-source"
               ref={coalitionImage}
               data-scroll
               data-scroll-direction="horizontal"
-              data-scroll-speed="0.8"
+              data-scroll-speed="-0.8"
             >
               <h2 className="text-5xl py-4 whitespace-nowrap">
                 Collective Negotiation
@@ -337,6 +337,10 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <AiFillBank size={40} />
                 Community banking & microloans
+              </h3>
+              <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
+                <FaHandHoldingWater size={40} />
+                Water/air quality testing
               </h3>
             </div>
           </FixedContainer>
