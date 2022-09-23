@@ -165,7 +165,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               <div className="flex-col w-[600px] ml-20 mt-16">
                 <h3 className="text-3xl py-4">New York</h3>
                 <h4 className="text-xl">
-                  50+ well stablished tenants associations.
+                  50+ well established tenants associations.
                 </h4>
                 <h3 className="text-3xl py-4">Berlin</h3>
                 <h4 className="text-xl">
