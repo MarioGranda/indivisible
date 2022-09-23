@@ -147,22 +147,22 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
                   <div className="flex-col">
                     <Image
                       src="/static/images/ny-aereal.png"
-                      width="300"
+                      width="370"
                       height="255"
                       className="rounded-xl"
                     />
                   </div>
-                  <div className="flex-col md:mt-36">
+                  <div className="flex-col md:mt-48">
                     <Image
                       src="/static/images/berlin-aereal.jpeg"
-                      width="300"
+                      width="370"
                       height="255"
                       className="rounded-xl"
                     />
                   </div>
                 </div>
               </div>
-              <div className="flex-col w-[500px] ml-20 mt-16">
+              <div className="flex-col w-[600px] ml-20 mt-16">
                 <h3 className="text-3xl py-4">New York</h3>
                 <h4 className="text-xl">
                   50+ well stablished tenants associations.
