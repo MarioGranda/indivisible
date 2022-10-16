@@ -2,34 +2,15 @@ import FixedContainer from "@/client/layouts/FixedContainer";
 import Image from "next/image";
 import React, { FC, useEffect, useRef, useState } from "react";
 import Footer from "@/client/components/Footer";
-import {
-  LocomotiveScrollProvider,
-  useLocomotiveScroll,
-} from "react-locomotive-scroll";
-import {
-  MdAttachMoney,
-  MdDoNotTouch,
-  MdElectricBike,
-  MdFamilyRestroom,
-  MdPhoneIphone,
-} from "react-icons/md";
+import { LocomotiveScrollProvider } from "react-locomotive-scroll";
+import { MdElectricBike, MdPhoneIphone } from "react-icons/md";
 import { TbRouter } from "react-icons/tb";
-import { FaHandHoldingWater, FaHandshake } from "react-icons/fa";
+import { FaHandHoldingWater } from "react-icons/fa";
 import { HiShieldCheck } from "react-icons/hi";
-import {
-  GiBrain,
-  GiDiscussion,
-  GiHealingShield,
-  GiScrollQuill,
-  GiVote,
-} from "react-icons/gi";
+import { GiBrain, GiDiscussion, GiScrollQuill, GiVote } from "react-icons/gi";
 import Marquee from "react-fast-marquee";
 import { BENEFITS } from "@/client/utils/benefits";
 import { useRouter } from "next/router";
-import {
-  fetchStrapiBullets,
-  fetchStrapiHomePage,
-} from "@/backend/services/strapi";
 import { BsDot } from "react-icons/bs";
 import { AiFillBank } from "react-icons/ai";
 
@@ -47,7 +28,7 @@ interface Props {
 const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const borderIn = useRef<HTMLDivElement>(null);
   const borderOut = useRef<HTMLDivElement>(null);
-  const text = useRef<HTMLParagraphElement>(null);
+  const gif = useRef<HTMLDivElement>(null);
   const containerRef = useRef(null);
   const coalitionImage = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -57,16 +38,14 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   const handleZoom = (scroll) => {
     scroll.on("scroll", (args) => {
       const scrollY = args.scroll.y;
-
-      console.log(args.currentElements);
       if (scrollY <= 100 && isDown) {
         isDown = false;
-        text.current.classList.remove("animate-disappear");
-        text.current.classList.add("animate-appear");
+        gif.current.classList.remove("animate-disappear");
+        gif.current.classList.add("animate-appear");
       } else if (scrollY > 100 && !isDown) {
         isDown = true;
-        text.current.classList.remove("animate-appear");
-        text.current.classList.add("animate-disappear");
+        gif.current.classList.remove("animate-appear");
+        gif.current.classList.add("animate-disappear");
       }
     });
   };
@@ -86,7 +65,7 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
     >
       <div data-scroll-container ref={containerRef}>
         <div
-          ref={text}
+          ref={gif}
           data-scroll-section
           id="deploying-democracy"
           className="text-white font-source"
@@ -246,11 +225,11 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
               </h2>
               <h3 className="text-xl py-4">
                 Uniting across blockchains has never been easier.
-                <p>
-                  Build <b>coalitions</b> with others based on location or
-                  interest.{" "}
-                </p>
               </h3>
+              <p>
+                Build <b>coalitions</b> with others based on location or
+                interest.{" "}
+              </p>
             </div>
             <div
               className="place-self-end"
@@ -304,19 +283,19 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
         </div>
         <div id="about" data-scroll-section className="h-screen mb-[700px]">
           <FixedContainer className="flex flex-col gap-52 text-white font-source">
-            <p
+            <div
               data-scroll
               data-scroll-sticky
               data-scroll-target="#about"
               data-scroll-repeat
               className="pt-44 w-[524px] text-4xl"
             >
-              Services & Benefits
+              <p className="pt-44 w-[524px] text-4xl">Services & Benefits</p>
               <p className="pt-8 text-xl">
                 Members receive group rates & discounts just like family and
                 business plans & select credit card holders.
               </p>
-            </p>
+            </div>
             <div className="pl-20 w-[624px] place-self-end">
               <h3 className="flex gap-5 text-2xl pt-10 pb-5 items-center">
                 <MdPhoneIphone size={40} />
