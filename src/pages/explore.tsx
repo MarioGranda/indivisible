@@ -2,8 +2,8 @@ import React, { FC, useRef } from "react";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import { findAllDaos } from "@/backend/repositories/dao";
 import { Dao } from "@/shared/models";
-import DaoCard from "@/client/components/DaoCard";
-import Hero from "@/client/components/Hero";
+import DaoCard from "@/client/components/explore/DaoCard";
+import Hero from "@/client/components/explore/Hero";
 
 interface Props {
   daos: Dao[];
@@ -13,7 +13,7 @@ const Explore: FC<Props> = ({ daos }) => {
   const nftRef = useRef<HTMLDivElement>(null);
 
   const cards = daos.map((dao) => (
-    <DaoCard className="mt-5" itemId={dao.id} key={dao.id} dao={dao} />
+    <DaoCard className="mt-5" key={dao.id} dao={dao} />
   ));
   return (
     <div className="explore-bg bg-cover">

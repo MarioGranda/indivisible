@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "@/client/redux/store";
 
 import "@/client/styles/globals.scss";
-import NextScripts from "@/client/components/NextScripts";
+import NextScripts from "@/client/components/next/NextScripts";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -24,7 +24,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
 
 const TopProgressBar = dynamic(
   () => {
-    return import("@/client/components/TopProgressBar");
+    return import("@/client/components/shared/TopProgressBar");
   },
   { ssr: false }
 );

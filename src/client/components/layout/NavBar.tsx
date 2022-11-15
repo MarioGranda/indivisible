@@ -1,8 +1,8 @@
-import getProvider from "@/shared/utils/getProvider";
-import { parseEthAddress } from "@/shared/utils/parse";
+import getProvider from "@/shared/utils/get/provider";
+import { parseEthAddress } from "@/shared/utils/format/ethAddress";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import FixedContainer from "../layouts/FixedContainer";
+import FixedContainer from "../../layouts/FixedContainer";
 
 const NavBar = () => {
   const [userWallet, setUserWallet] = useState(null);

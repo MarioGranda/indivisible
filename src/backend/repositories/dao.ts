@@ -1,9 +1,9 @@
-import { TABLE_NAMES } from "@/shared/constants/tableNames";
+import TABLE_NAMES from "@/shared/constants/tableNames";
 import { Dao } from "@/shared/models";
-import { slugify } from "@/shared/utils/strings";
+import { slugify } from "@/shared/utils/format/strings";
 import { CreateDaoInput } from "@/shared/validators/createDao";
 import { getPool } from "../services/database";
-import { insertOne } from "../utils/database";
+import { insertOne } from "../utils/database/insert";
 import { RowDataPacket } from "mysql2/promise";
 import { daoMapper } from "../mappers/dao";
 

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import Notification from "../components/Notification";
+import Footer from "../components/layout/Footer";
+import NavBar from "../components/layout/NavBar";
+import Notification from "../components/shared/Notification";
 
 const BaseLayout = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,4 +1,4 @@
-import React, { FC, LegacyRef, useState } from "react";
+import React, { FC, useState } from "react";
 import Label from "./Label";
 
 export interface Item {
@@ -19,7 +19,6 @@ export interface Props {
 }
 
 const Select: FC<Props> = ({
-  className,
   label,
   name,
   id = name,

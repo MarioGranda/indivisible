@@ -1,6 +1,6 @@
-import { TABLE_NAMES } from "@/shared/constants/tableNames";
+import TABLE_NAMES from "@/shared/constants/tableNames";
 import { getPool } from "../services/database";
-import { insertOne } from "../utils/database";
+import { insertOne } from "../utils/database/insert";
 import { JoinDaoInput } from "@/shared/validators/joinDao";
 import { User } from "@/shared/models";
 import { RowDataPacket } from "mysql2/promise";

@@ -1,7 +1,7 @@
 import FixedContainer from "@/client/layouts/FixedContainer";
 import Image from "next/image";
-import React, { FC, useEffect, useRef, useState } from "react";
-import Footer from "@/client/components/Footer";
+import React, { FC, useRef } from "react";
+import Footer from "@/client/components/layout/Footer";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { MdElectricBike, MdPhoneIphone } from "react-icons/md";
 import { TbRouter } from "react-icons/tb";
@@ -9,10 +9,14 @@ import { FaHandHoldingWater } from "react-icons/fa";
 import { HiShieldCheck } from "react-icons/hi";
 import { GiBrain, GiDiscussion, GiScrollQuill, GiVote } from "react-icons/gi";
 import Marquee from "react-fast-marquee";
-import { BENEFITS } from "@/client/utils/benefits";
+import BENEFITS from "@/client/constants/benefits";
 import { useRouter } from "next/router";
 import { BsDot } from "react-icons/bs";
 import { AiFillBank } from "react-icons/ai";
+import {
+  fetchStrapiBullets,
+  fetchStrapiHomePage,
+} from "@/backend/services/strapi";
 
 interface Section {
   title: string;
@@ -413,28 +417,28 @@ const Home: FC<Props> = ({ paragraphs, bullets }) => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const paragraphs = await fetchStrapiHomePage();
-//   const bullets = await fetchStrapiBullets();
+export const getServerSideProps = async () => {
+  const paragraphs = await fetchStrapiHomePage();
+  const bullets = await fetchStrapiBullets();
 
-//   return {
-//     props: {
-//       paragraphs: paragraphs
-//         .filter((p) => p.attributes.title !== null)
-//         .map((p) => ({
-//           title: p.attributes.title,
-//           text: p.attributes.paragraph,
-//           subtitle: p.attributes.subtitle ?? "",
-//         })),
-//       bullets: bullets
-//         .filter((p) => p.attributes.title !== null)
-//         .map((p) => ({
-//           title: p.attributes.title,
-//           text: p.attributes.paragraph,
-//           sectionTitle: p.attributes.sectionTitle,
-//         })),
-//     },
-//   };
-// };
+  return {
+    props: {
+      paragraphs: paragraphs
+        .filter((p) => p.attributes.title !== null)
+        .map((p) => ({
+          title: p.attributes.title,
+          text: p.attributes.paragraph,
+          subtitle: p.attributes.subtitle ?? "",
+        })),
+      bullets: bullets
+        .filter((p) => p.attributes.title !== null)
+        .map((p) => ({
+          title: p.attributes.title,
+          text: p.attributes.paragraph,
+          sectionTitle: p.attributes.sectionTitle,
+        })),
+    },
+  };
+};
 
 export default Home;

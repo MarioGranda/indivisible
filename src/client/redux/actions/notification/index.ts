@@ -1,7 +1,7 @@
 import {
   isMetamaskError,
   getRevertedTransactionMessage,
-} from "@/client/utils/errors";
+} from "@/client/utils/errors/blockchain";
 import { Notification } from "@/shared/models/index";
 
 export type ActionType = ReturnType<

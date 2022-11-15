@@ -1,4 +1,4 @@
-import { TABLE_NAMES } from "@/shared/constants/tableNames";
+import TABLE_NAMES from "@/shared/constants/tableNames";
 import { Proposal } from "@/shared/models";
 import { getPool } from "../services/database";
 import { RowDataPacket } from "mysql2/promise";

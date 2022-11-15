@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { JsonRpcProvider } from "@ethersproject/providers";
-import getNetwork from "@/shared/utils/getNetwork";
+import getNetwork from "@/shared/utils/get/network";
 
 const getProvider = () => {
   let provider: JsonRpcProvider;

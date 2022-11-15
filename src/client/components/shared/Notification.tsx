@@ -2,12 +2,12 @@ import { FC, useEffect, MouseEvent } from "react";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import Link from "next/link";
-import { getPolygonscanUrl } from "@/shared/utils/createUrls";
+import { getPolygonscanUrl } from "@/shared/utils/create/urls";
 import { useDispatch } from "react-redux";
-import { closeNotification } from "../redux/actions/notification";
-import { useNotification } from "../redux/selectors";
+import { closeNotification } from "../../redux/actions/notification";
+import { useNotification } from "../../redux/selectors";
 import { Router } from "next/router";
-import FixedContainer from "../layouts/FixedContainer";
+import FixedContainer from "../../layouts/FixedContainer";
 import { CgSpinner } from "react-icons/cg";
 import { BiErrorAlt } from "react-icons/bi";
 

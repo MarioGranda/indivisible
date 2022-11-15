@@ -1,10 +1,10 @@
 import { findCommentsByProposalId } from "@/backend/repositories/comments";
 import { findProposal } from "@/backend/repositories/proposals";
-import Input from "@/client/components/Input";
-import Post from "@/client/components/Post";
-import TextArea from "@/client/components/TextArea";
+import Input from "@/client/components/shared/Input";
+import Post from "@/client/components/proposal/Post";
+import TextArea from "@/client/components/shared/TextArea";
 import FixedContainer from "@/client/layouts/FixedContainer";
-import { publish } from "@/client/utils/createComment";
+import { publish } from "@/client/utils/create/comment";
 import { Comment } from "@/shared/models";
 import React, { FC, useState } from "react";
 import { MdOutlineAdd } from "react-icons/md";
@@ -20,9 +20,6 @@ const Proposal: FC<Props> = ({ proposalId, comments }) => {
     title: null,
     text: null,
   });
-
-  const postClassName =
-    "bg-gray-dark text-white text-13 p-4 rounded-xl w-full outline-none";
 
   const posts = comments
     .filter((c) => c.id === c.headComment)

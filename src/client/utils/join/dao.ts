@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { JsonRpcProvider } from "@ethersproject/providers";
-import Dao from "../../../artifacts/contracts/DAO.sol/DAO.json";
+import Dao from "../../../../artifacts/contracts/DAO.sol/DAO.json";
 
 export async function joinDao(daoAddress: string, provider: JsonRpcProvider) {
   await provider.send("eth_requestAccounts", []);

@@ -88,7 +88,6 @@ export const preconditionFailedError = (
 };
 
 const sendProblem = (res: NextApiResponse, problem: Problem) => {
-  // We add a blank type by default for now, but we should ideally have a URL to document each error type
   return res
     .status(problem.status)
     .setHeader("Content-Type", "application/problem+json")

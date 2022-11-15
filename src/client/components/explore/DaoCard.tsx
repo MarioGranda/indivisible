@@ -2,23 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC, MouseEvent } from "react";
 import { Dao } from "@/shared/models";
-import { getDaoUrl } from "@/shared/utils/createUrls";
-import { joinDao } from "../utils/joinDao";
-import getProvider from "@/shared/utils/getProvider";
+import { getDaoUrl } from "@/shared/utils/create/urls";
+import { joinDao } from "../../utils/join/dao";
+import getProvider from "@/shared/utils/get/provider";
 import axios from "axios";
 import classNames from "classnames";
 import {
   openPendingTransactionNotification,
   openTransactionCompleteNotification,
   openTransactionFailedNotification,
-} from "../redux/actions/notification";
+} from "../../redux/actions/notification";
 import { useDispatch } from "react-redux";
-//import { DEFAULT_IMAGE_PLACEHOLDER } from "@/shared/constants/path";
 
 interface Props {
   dao: Dao;
   className?: string;
-  itemId: number;
 }
 
 const DaoCard: FC<Props> = ({ dao, className }) => {
@@ -65,8 +63,6 @@ const DaoCard: FC<Props> = ({ dao, className }) => {
                 src={dao.image}
                 alt={`${dao.name} image`}
                 layout="fill"
-                //blurDataURL={DEFAULT_IMAGE_PLACEHOLDER}
-                //placeholder="blur"
                 className="rounded object-cover "
               />
             </div>

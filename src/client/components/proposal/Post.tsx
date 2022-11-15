@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import { Comment } from "@/shared/models";
-import TextArea from "./TextArea";
+import TextArea from "../shared/TextArea";
 import { MdClose } from "react-icons/md";
-import { publish } from "../utils/createComment";
+import { publish } from "../../utils/create/comment";
 
 interface Props {
   proposalId: number;

@@ -4,8 +4,8 @@ import { findDaoBySlug } from "@/backend/repositories/dao";
 import FixedContainer from "@/client/layouts/FixedContainer";
 import { findProposalsByDaoId } from "@/backend/repositories/proposals";
 import { findUsersByDao } from "@/backend/repositories/user";
-import ProposalsTable from "@/client/components/ProposalsTable";
-import TopMembers from "@/client/components/TopMembers";
+import ProposalsTable from "@/client/components/dao/ProposalsTable";
+import TopMembers from "@/client/components/dao/TopMembers";
 
 interface Props {
   dao: Dao;

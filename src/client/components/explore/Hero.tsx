@@ -1,6 +1,6 @@
 import { Dao } from "@/shared/models";
 import { FC } from "react";
-import FixedContainer from "../layouts/FixedContainer";
+import FixedContainer from "../../layouts/FixedContainer";
 import DaoCard from "./DaoCard";
 import { ImArrowRight2 } from "react-icons/im";
 import HeroStatistic from "./HeroStatistic";
@@ -34,7 +34,6 @@ const Hero: FC<Props> = ({ dao }) => {
             <div className="absolute inset-0 w-[250px] h-[320px] border border-white rotate-[8.9deg] rounded-xl translate-x-5 translate-y-5"></div>
             <DaoCard
               className="absolute inset-0 left-0 m-4"
-              itemId={dao.id}
               key={dao.id}
               dao={dao}
             />

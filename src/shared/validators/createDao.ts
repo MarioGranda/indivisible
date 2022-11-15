@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ETHEREUM_ADDRESS_REGEX } from "../constants/ethRegexAddress";
+import ETHEREUM_ADDRESS_REGEX from "../constants/ethRegexAddress";
 
 //S3
 export const CreateDaoInput = z

@@ -1,6 +1,6 @@
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { slugify } from "@/shared/utils/strings";
+import { slugify } from "@/shared/utils/format/strings";
 
 function getCredentials() {
   return {

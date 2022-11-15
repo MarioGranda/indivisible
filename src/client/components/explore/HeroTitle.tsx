@@ -17,13 +17,8 @@ const HeroTitle: FC = () => {
 
       <h2 className="font-bold font-source text-white max-w-[15rem] md:max-w-none whitespace-pre-line">
         Become a member of{" "}
-        <span
-          //onClick={() => scrollToElement(nftRef)}
-          className="text-brand underline cursor-pointer"
-        >
-          INDV
-        </span>{" "}
-        and help us organize the globe.
+        <span className="text-brand underline cursor-pointer">INDV</span> and
+        help us organize the globe.
       </h2>
     </>
   );

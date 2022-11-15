@@ -1,27 +1,27 @@
 import { ChangeEvent, FC, useCallback, useState } from "react";
 import FixedContainer from "@/client/layouts/FixedContainer";
-import Input from "@/client/components/Input";
-import TextArea from "@/client/components/TextArea";
+import Input from "@/client/components/shared/Input";
+import TextArea from "@/client/components/shared/TextArea";
 import { ContentFileType, Dao } from "@/shared/models";
-import FileInput from "@/client/components/FileInput";
+import FileInput from "@/client/components/shared/FileInput";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import getProvider from "@/shared/utils/getProvider";
-import { deployDao } from "@/client/utils/createDao";
+import getProvider from "@/shared/utils/get/provider";
+import { deployDao } from "@/client/utils/create/dao";
 import {
   openPendingTransactionNotification,
   openTransactionCompleteNotification,
   openTransactionFailedNotification,
 } from "@/client/redux/actions/notification";
 import { useRouter } from "next/router";
-import Toggle from "@/client/components/Toggle";
-import Select from "@/client/components/Select";
+import Toggle from "@/client/components/shared/Toggle";
+import Select from "@/client/components/shared/Select";
 import { findAllDaos } from "@/backend/repositories/dao";
 import { MdAdd, MdClose } from "react-icons/md";
 import {
   generateMerkleRoot,
   generateMerkleTree,
-} from "@/shared/utils/merkleTree";
+} from "@/shared/utils/blockchain/merkleTree";
 
 interface Props {
   daos: Dao[];
@@ -106,12 +106,7 @@ export const CreateDao: FC<Props> = ({ daos }) => {
           }
         }
       } catch (error) {
-        // await dispatch(
-        //   openNotification({
-        //     title: "Error",
-        //     description: "Make sure you select an image file.",
-        //   })
-        // );
+        console.log(error);
       }
     },
     []

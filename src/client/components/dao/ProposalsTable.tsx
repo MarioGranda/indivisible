@@ -1,5 +1,5 @@
 import { Dao, Proposal } from "@/shared/models";
-import { getProposalUrl } from "@/shared/utils/createUrls";
+import { getProposalUrl } from "@/shared/utils/create/urls";
 import Link from "next/link";
 import React, { FC } from "react";
 

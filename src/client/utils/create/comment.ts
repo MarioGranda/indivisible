@@ -1,4 +1,4 @@
-import getProvider from "@/shared/utils/getProvider";
+import getProvider from "@/shared/utils/get/provider";
 import { CreateDiscussionInput } from "@/shared/validators/createDiscussion";
 import axios from "axios";
 

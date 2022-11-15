@@ -1,8 +1,8 @@
 import { ethers } from "ethers";
 import { JsonRpcProvider } from "@ethersproject/providers";
-import DaoCreator from "../../../artifacts/contracts/DAOCreator.sol/DAOCreator.json";
-import Dao from "../../../artifacts/contracts/DAO.sol/DAO.json";
-import { DaoCreatedEvent, getEvent } from "@/shared/utils/events";
+import DaoCreator from "../../../../artifacts/contracts/DAOCreator.sol/DAOCreator.json";
+import Dao from "../../../../artifacts/contracts/DAO.sol/DAO.json";
+import { DaoCreatedEvent, getEvent } from "@/shared/utils/blockchain/events";
 import { CreateDaoInput } from "@/shared/validators/createDao";
 
 export async function deployDao(

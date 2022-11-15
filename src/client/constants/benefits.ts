@@ -1,4 +1,4 @@
-export const BENEFITS = [
+const BENEFITS = [
   "Low cost of entry",
   "Easy to use",
   "Simple token creation",
@@ -10,3 +10,5 @@ export const BENEFITS = [
   "Best case policy templates & support",
   "Tools to collect, divide & distribute funds |",
 ] as const;
+
+export default BENEFITS;
